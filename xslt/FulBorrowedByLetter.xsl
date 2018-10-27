@@ -10,6 +10,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:include href="recordTitle.xsl" />
 
   <xsl:template match="/">
+  
     <html>
       <head>
         <xsl:call-template name="generalStyle" />
@@ -34,8 +35,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					@@picked_up_by@@ <xsl:value-of select="notification_data/borrower/name"/>
                 </td>
               </tr>
+			<!--
 			<tr><td>@@request_complete@@</td></tr>
 			&#160;
+			-->
 
 			<table>
 				<br/>
@@ -48,6 +51,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
         <!-- footer.xsl -->
         <xsl:call-template name="lastFooter" />
+		<xsl:call-template name="donotreply" />
       </body>
     </html>
   </xsl:template>
