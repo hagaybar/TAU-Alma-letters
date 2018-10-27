@@ -64,7 +64,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		
 					<table>
 						<tr><td>@@sincerely@@</td></tr>
-						<tr><td>@@department@@</td></tr>
+						<!-- <tr><td>@@department@@</td></tr> -->
+						<xsl:call-template name="rs_dept_details" />
 					</table>
 				</div>
 			</div>
