@@ -68,6 +68,24 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<!-- recordTitle.xsl -->
 								</td>
 							</tr>
+							<xsl:if test="notification_data/request/display/chapter_title !=''">
+								<tr>
+									<td>
+										<b> @@chapter_title@@: </b>
+										<xsl:value-of select="notification_data/request/display/chapter_title" />
+										<!-- recordTitle.xsl -->
+									</td>
+								</tr>
+							</xsl:if>
+							<xsl:if test="notification_data/request/display/chapter_author !=''">
+								<tr>
+									<td>
+										<b> @@chapter_author@@: </b>
+										<xsl:value-of select="notification_data/request/display/chapter_author" />
+										<!-- recordTitle.xsl -->
+									</td>
+								</tr>
+							</xsl:if>
 							<xsl:if test="notification_data/request/display/title !=''">
 								<tr>
 									<td>
@@ -371,14 +389,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<!-- rs_dept_details details here from footer.xsl-->
 							<xsl:call-template name="rs_dept_details" />
 							<!-- all address lines are commented out
+							<tr>
+								<td>
+									<xsl:value-of select="notification_data/library/name" />
+								</td>
+							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if> 
-
+							</xsl:if>
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -428,6 +450,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</div>
 				<xsl:call-template name="lastFooter" />
 				<!-- footer.xsl -->
+				<xsl:call-template name="donotreply"/>
 			</body>
 		</html>
 	</xsl:template>
