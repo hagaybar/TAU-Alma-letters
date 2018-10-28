@@ -368,18 +368,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
-							<tr>
-								<td>
-									<xsl:value-of select="notification_data/library/name" />
-								</td>
-							</tr>
+							<!-- rs_dept_details details here from footer.xsl-->
+							<xsl:call-template name="rs_dept_details" />
+							<!-- all address lines are commented out
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if>
+							</xsl:if> 
+
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -423,6 +422,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 								</tr>
 
 							</xsl:if>
+							-->
 						</table>
 					</div>
 				</div>
