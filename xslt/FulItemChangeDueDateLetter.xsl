@@ -9,7 +9,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:include href="footer.xsl" />
 <xsl:include href="style.xsl" />
 
+
 <xsl:template match="/">
+	<xsl:if test="notification_data/message='DUE_DATE_CHANGE_ONLY'">
+		<xsl:message terminate="yes">don't send this letter</xsl:message>
+	</xsl:if>
 	<html>
 		<head>
 		<xsl:call-template name="generalStyle" />
@@ -20,7 +24,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<xsl:call-template name="bodyStyleCss" /> <!-- style.xsl -->
 			</xsl:attribute>
 
-				<xsl:call-template name="head" /> <!-- header.xsl -->
+				<xsl:call-template name="headFulItemChangeDateLetter" /> <!-- from header001.xsl, customed to change the letter name according to its purpose -->
 				<xsl:call-template name="senderReceiverExtended" /> <!-- SenderReceiver.xsl -->
 
 				<br />
@@ -36,9 +40,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</xsl:if>
 					<xsl:if test="notification_data/message='RECALL_ONLY'">
 						<b>@@recall_and_no_date_change@@</b>
-					</xsl:if>
-					<xsl:if test="notification_data/message='DUE_DATE_CHANGE_ONLY'">
-						<b>@@message@@</b>
 					</xsl:if>
 					<xsl:if test="notification_data/message='RECALL_CANCEL_RESTORE_ORIGINAL_DUEDATE'">
 						<b>@@cancel_recall_date_change@@</b>
