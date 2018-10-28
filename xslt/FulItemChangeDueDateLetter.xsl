@@ -73,8 +73,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							</xsl:if>
 							<th>@@old_due_date@@</th>
 							<th>@@new_due_date@@</th>
-							<th>@@library@@</th>
+							
 							<!-- 
+							<th>@@library@@</th>
 							<th>@@author@@</th>
 							-->
 						</tr>
@@ -87,7 +88,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							</xsl:if>
 							<td><xsl:value-of select="old_due_date_str"/></td>
 							<td><xsl:value-of select="new_due_date_str"/></td>
+							<!--
 							<td><xsl:value-of select="library_name"/></td>
+							-->
 						</tr>
 						</xsl:for-each>
 
