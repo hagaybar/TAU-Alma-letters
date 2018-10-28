@@ -21,7 +21,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			</xsl:attribute>
 
 				<xsl:call-template name="head" /> <!-- header.xsl -->
-				<xsl:call-template name="senderReceiver" /> <!-- SenderReceiver.xsl -->
+				<xsl:call-template name="senderReceiverExtended" /> <!-- SenderReceiver.xsl -->
 
 				<br />
 				<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
@@ -68,18 +68,23 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						</xsl:attribute>
 						<tr>
 							<th>@@title@@</th>
-							<th>@@description@@</th>
-							<th>@@author@@</th>
+							<xsl:if test="notification_data/item_loans/item_loan/item_description !=''">
+								<th>@@description@@</th>
+							</xsl:if>
 							<th>@@old_due_date@@</th>
 							<th>@@new_due_date@@</th>
 							<th>@@library@@</th>
+							<!-- 
+							<th>@@author@@</th>
+							-->
 						</tr>
 
                 		<xsl:for-each select="notification_data/item_loans/item_loan">
 						<tr>
 							<td><xsl:value-of select="title"/></td>
-							<td><xsl:value-of select="item_description"/></td>
-							<td><xsl:value-of select="author"/></td>
+							<xsl:if test="item_description !=''">
+								<td><xsl:value-of select="item_description"/></td>
+							</xsl:if>
 							<td><xsl:value-of select="old_due_date_str"/></td>
 							<td><xsl:value-of select="new_due_date_str"/></td>
 							<td><xsl:value-of select="library_name"/></td>
@@ -92,17 +97,27 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
              </table>
 
 			<br />
-			<table>
-				<tr><td>@@sincerely@@</td></tr>
-				<tr><td>@@department@@</td></tr>
+			<table cellspacing="20">
+				<tr>
+					<td>@@sincerely@@</td>
+				</tr>
+				<tr>
+					<td>@@department@@ /</td>
+					<td><xsl:value-of select="notification_data/organization_unit/name"/> / </td>
+					<td><xsl:value-of select="notification_data/organization_unit/phone/phone"/> / </td>
+					<td><a href="mailto:{notification_data/organization_unit/email/email}"><xsl:value-of select="notification_data/organization_unit/email/email" /></a></td>
+				</tr>
 			</table>
-
           </div>
         </div>
-
-				<xsl:call-template name="lastFooter" /> <!-- footer.xsl -->
-				<xsl:call-template name="contactUs" />
-			</body>
+		<!-- footer.xsl -->
+		<xsl:call-template name="lastFooter" />
+		<xsl:call-template name="donotreply" />
+		<!--
+		<xsl:call-template name="contactUs" />
+		<xsl:call-template name="myAccount" />
+		-->
+		</body>
 	</html>
 </xsl:template>
 
