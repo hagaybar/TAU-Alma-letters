@@ -25,7 +25,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			</xsl:attribute>
 
 				<xsl:call-template name="headFulItemChangeDateLetter" /> <!-- from header001.xsl, customed to change the letter name according to its purpose -->
-				<xsl:call-template name="senderReceiverExtended" /> <!-- SenderReceiver.xsl -->
+				<xsl:call-template name="senderReceiverRevised" /> <!-- SenderReceiver.xsl -->
 
 				<br />
 				<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
