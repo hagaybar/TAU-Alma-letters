@@ -19,7 +19,7 @@
 				</xsl:attribute>
 				<xsl:call-template name="head" />
 				<!-- header.xsl -->
-				<xsl:call-template name="senderReceiver" />
+				<xsl:call-template name="senderReceiverExtended" />  <!-- SenderReceiver.xsl -->
 				<!-- SenderReceiver.xsl -->
 				<br />
 				<xsl:call-template name="toWhomIsConcerned" />
@@ -41,7 +41,7 @@
 							</tr>
 							<tr>
 								<td>
-									<table cellpadding="5" class="listing">
+									<table cellpadding="4" class="listing">
 										<xsl:attribute name="style">
 											<xsl:call-template name="mainTableStyleCss" />
 											<!-- style.xsl -->
@@ -49,9 +49,12 @@
 										<tr>
 											<th>@@title@@</th>
 											<th>@@description@@</th>
-											<th>@@author@@</th>
+											<th>@@call_number@@</th>
 											<th>@@due_date@@</th>
-											<th>@@library@@</th>
+											<!-- 
+											<th>@@library@@</th> 
+											<th>@@author@@</th>
+											-->
 										</tr>
 										<xsl:for-each select="notification_data/item_loans/item_loan">
 											<tr>
@@ -62,13 +65,10 @@
 													<xsl:value-of select="description"/>
 												</td>
 												<td>
-													<xsl:value-of select="author"/>
+													<xsl:value-of select="call_number"/>
 												</td>
 												<td>
 													<xsl:value-of select="due_date"/>
-												</td>
-												<td>
-													<xsl:value-of select="library_name"/>
 												</td>
 											</tr>
 										</xsl:for-each>
@@ -84,18 +84,27 @@
 			@@additional_info_2@@
 				
 						<br />
-						<table>
+						<table cellspacing="20">
+							<tr><td>@@sincerely@@</td></tr>
 							<tr>
-								<td>@@sincerely@@</td>
-							</tr>
-							<tr>
-								<td>@@department@@</td>
+								<td>@@department@@ /</td>
+								<td><xsl:value-of select="notification_data/organization_unit/name"/> / </td>
+								<td><xsl:value-of select="notification_data/organization_unit/phone/phone"/> / </td>
+								<td><a href="mailto:{notification_data/organization_unit/email/email}"><xsl:value-of select="notification_data/organization_unit/email/email" /></a></td>
 							</tr>
 						</table>
 					</div>
 				</div>
+				
+								
 				<!-- footer.xsl -->
 				<xsl:call-template name="lastFooter" />
+				<xsl:call-template name="donotreply" />
+		
+				<!--
+				<xsl:call-template name="contactUs" />
+				<xsl:call-template name="myAccount" />
+				-->
 			</body>
 		</html>
 	</xsl:template>
