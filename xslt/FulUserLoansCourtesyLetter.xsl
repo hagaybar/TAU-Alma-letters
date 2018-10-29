@@ -48,15 +48,8 @@
 										</xsl:attribute>
 										<tr>
 											<th>@@title@@</th>
-											<xsl:if test="notification_data/item_loans/item_loan/description !=''">
-												<th>@@description@@</th>
-											</xsl:if>
-											<th>@@call_number@@</th>
+											<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 											<th>@@due_date@@</th>
-											<xsl:if test="notification_data/item_loans/item_loan/shortened_due_date_reason !=''">
-												<th> reason / סיבה </th>
-											</xsl:if>
-												
 											<th>@@library@@</th> 
 											<!-- 
 											<th>@@author@@</th>
@@ -67,21 +60,11 @@
 												<td>
 													<xsl:value-of select="title"/>
 												</td>
-												<xsl:if test="notification_data/item_loans/item_loan/description !=''">
-													<td>
-														<xsl:value-of select="description"/>
-													</td>
-												</xsl:if>
 												<td>
-													<xsl:value-of select="call_number"/>
+													<xsl:value-of select="barcode"/>
 												</td>
 												<td>
-													<xsl:value-of select="due_date"/>
-												</td>
-												<td>
-													<xsl:if test="notification_data/item_loans/item_loan/shortened_due_date_reason !=''">
-														<xsl:value-of select="shortened_due_date_reason"/>
-													</xsl:if>
+													<xsl:value-of select="new_due_date_str"/>
 												</td>
 												<td>
 													<xsl:value-of select="library_name"/>
