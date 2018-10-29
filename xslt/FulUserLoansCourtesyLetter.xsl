@@ -30,7 +30,10 @@
 							<tr>
 								<td>
 									<b>@@message@@</b>
-									<br/>
+									<br />
+									<br />
+									@@additional_info_1@@
+
 									<br/>
 								</td>
 							</tr>
@@ -50,7 +53,6 @@
 											<th>@@title@@</th>
 											<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 											<th>@@due_date@@</th>
-											<th><xsl:call-template name="reason" /></th> <!-- custom template in footer.xsl -->
 											<th>@@library@@</th> 
 											<!-- 
 											<th>@@author@@</th>
@@ -68,9 +70,6 @@
 													<xsl:value-of select="new_due_date_str"/>
 												</td>
 												<td>
-													<xsl:call-template name="due_date_reason" />
-												</td>
-												<td>
 													<xsl:value-of select="library_name"/>
 												</td>
 											</tr>
@@ -80,8 +79,6 @@
 							</tr>
 						</table>
 						<br />
-						<br />
-				@@additional_info_1@@
 			
 						<br />
 			@@additional_info_2@@
