@@ -47,19 +47,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</xsl:choose>
 </xsl:variable>
 
-<xsl:variable name="location_header">
-	<xsl:choose>
-		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
-			<xsl:text>מיקום</xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>Location</xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:variable>
-
-
-
 <xsl:template name="recordTitleExtendedTable">
 	<table cellpadding="5" class="listing">
 	
@@ -72,28 +59,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<xsl:if test="notification_data/phys_item_display/issue_level_description !=''">
 					<th><xsl:value-of select="$description_header"/></th>
 				</xsl:if>
-			<th><xsl:value-of select="$location_header"/></th>
 		</tr>
 		<tr>
 			<td><xsl:value-of select="notification_data/phys_item_display/title_abcnph"/></td>
 			<xsl:if test="notification_data/phys_item_display/issue_level_description !=''">
 				<td><xsl:value-of select="notification_data/phys_item_display/issue_level_description"/></td>
 			</xsl:if>
-			<td><xsl:value-of select="notification_data/phys_item_display/call_number"/></td> 
 		</tr>
-
-
-	
-
+		
 	</table> 
 
 </xsl:template>
 </xsl:stylesheet>
 
-<!-- working on the item table
-
-/notification_data/receivers/receiver/user/user_preferred_language
-
-I must find out if a letter is sent per hold request (I believe that is the case) or maybe hold requests are somehow grouped?
-I cannot use alma variable (var) if it is not defined in the specific alma letter, in this letter for example: title and call_number might not exist
--->
