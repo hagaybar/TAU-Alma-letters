@@ -19,7 +19,7 @@
 				</xsl:attribute>
 				<xsl:call-template name="head" />
 				<!-- header.xsl -->
-				<xsl:call-template name="senderReceiverExtended" />  <!-- SenderReceiver.xsl -->
+				<xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
 				<!-- SenderReceiver.xsl -->
 				<br />
 				<xsl:call-template name="toWhomIsConcerned" />
