@@ -21,7 +21,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<xsl:call-template name="bodyStyleCss" /> <!-- style.xsl -->
 					</xsl:attribute>
 					<xsl:call-template name="head" /> <!-- header.xsl -->
-					<xsl:call-template name="senderReceiver" /> <!-- SenderReceiver.xsl -->
+					<xsl:call-template name="senderReceiverMinimal" /> <!-- SenderReceiver.xsl -->
 					<xsl:call-template name="toWhomIsConcerned" />
             		<table cellspacing="0" cellpadding="5" border="0">
             		<tr><td>&#160;@@jobCompletion@@</td></tr>
