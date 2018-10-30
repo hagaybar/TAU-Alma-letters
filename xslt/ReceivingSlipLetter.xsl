@@ -58,7 +58,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<tr>
 							<td>
 						<b>@@description@@: </b>
-							<xsl:value-of select="notification_data/description"/></td>
+							<xsl:value-of select="/notification_data/physical_item_info/description"/></td>
 						</tr>
 						<tr>
 							<td>
