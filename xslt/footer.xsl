@@ -3,6 +3,79 @@
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+<!-- 'lib_id' contains the unique id of the library , the logic of this variable is as follows:
+- check the letter type
+- for each of the defined letter types, get the library_id value from the relevant XML element.
+- If no value library_id is found in the element - output in var: 'empty_id_element'
+- If the letter type is not defined in the condition - output in var: 'letter_not_defined'
+ -->
+<xsl:variable name="letter_type">
+	<xsl:value-of select="/notification_data/general_data/letter_type" />
+</xsl:variable>
+ 
+<xsl:variable name="lib_id">
+	<xsl:choose>
+ 		
+		<xsl:when test="$letter_type = 'FulPlaceOnHoldShelfLetter'">
+			<xsl:if test="/notification_data/organization_unit/org_scope/library_id != ''">
+				<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id" />
+			</xsl:if>
+			<xsl:if test="/notification_data/organization_unit/org_scope/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>			
+		</xsl:when>
+		
+		<xsl:when test="$letter_type = 'GeneralMessageEmailLetter'">
+			<xsl:if test="/notification_data/library/org_scope/library_id != ''">
+				<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+			</xsl:if>
+			<xsl:if test="/notification_data/library/org_scope/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>
+		</xsl:when>
+		
+		<xsl:when test="$letter_type = 'QueryToPatronLetter'">
+			<xsl:if test="/notification_data/library/org_scope/library_id != ''">
+				<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+			</xsl:if>
+			<xsl:if test="/notification_data/library/org_scope/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>
+		</xsl:when>
+		
+		<xsl:when test="$letter_type = 'ResourceSharingReceiveSlipLetter'">		
+			<xsl:if test="/notification_data/library/org_scope/library_id != ''">
+				<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+			</xsl:if>
+			<xsl:if test="/notification_data/library/org_scope/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>		
+		</xsl:when>
+		
+		<xsl:when test="$letter_type = 'ResourceSharingReturnSlipLetter'">	
+			<xsl:if test="/notification_data/library/org_scope/library_id != ''">
+				<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+			</xsl:if>
+			<xsl:if test="/notification_data/library/org_scope/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>		
+		</xsl:when>
+		
+		<xsl:when test="$letter_type = 'ResourceSharingShippingSlipLetter'">
+			<xsl:if test="/notification_data/incoming_request/library_id != ''">
+				<xsl:value-of select="/notification_data/incoming_request/library_id"/>
+			</xsl:if>
+			<xsl:if test="/notification_data/incoming_request/library_id = ''">
+				<xsl:text>empty_id_element</xsl:text>
+			</xsl:if>			
+		</xsl:when>
+		
+		<xsl:otherwise>
+			<xsl:text>letter_not_defined</xsl:text>
+		</xsl:otherwise>
+		
+	</xsl:choose>
+</xsl:variable>
 
 <xsl:template name="salutation">
 
@@ -68,23 +141,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 
-<!-- 'lib_id' contains the unique id of the library We have two options, 
-for GeneralMessageEmailLetter and Patron Query Type Letters, the path for the language value will be: /notification_data/library/org_scope/library_id
-for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/organization_unit/org_scope/library_id
- --> 		
-<xsl:variable name="lib_id">
-	<xsl:choose>
-		<xsl:when test="/notification_data/library/org_scope/library_id != ''"> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters -->
-			<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
-		</xsl:when>
-		<xsl:when test="/notification_data/organization_unit/org_scope/library_id != ''"> <!-- for FulPlaceOnHoldShelfLetter letter type -->
-			<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id" /> 
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="/notification_data/incoming_request/library_id" /> <!-- for ResourceSharingShippingSlipLetter letter type -->
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:variable> 
 
 <xsl:variable name="lib_name">
 	<xsl:choose>
