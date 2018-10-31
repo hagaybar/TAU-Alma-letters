@@ -75,9 +75,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!-- this template add the rs Department contact details when called, 3 params should be specified: lib_id, letter_language, lib_name -->
 
 	<xsl:template name="rs_dept_details"> 
-		<xsl:param name="lib_id" select= "'undefined'" />
-		<xsl:param name="letter_language" select = "'undefined'" />
-		<xsl:param name="lib_name" select = "'undefined'" />
+		<xsl:param name="lib_id" select= "/notification_data/library/org_scope/library_id" />
+		<xsl:param name="letter_language" select = "/notification_data/languages/string" />
+		<xsl:param name="lib_name" select = "notification_data/library/name" />
 
 
 		<!-- 'rs_email' contains the library's email address, its value is determined according to the value of 'lib_id'. -->
@@ -273,7 +273,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<!-- the following template currently working for the GeneralMessageEmailLetter, not tested on other templates yet -->
 	<xsl:template name="rs_copyright">
-		<xsl:param name="lib_id" select= "'undefined'" />
+		<xsl:param name="lib_id" select= "/notification_data/library/org_scope/library_id" />
 		<xsl:choose>
 			<xsl:when test = "/notification_data/languages/string != 'he'">
 				<tr>
@@ -314,30 +314,36 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!-- a do-not-reply message in hebrew and english, does not apply to RS - cen. lib.-->
 
 	<xsl:template name="donotreply">
-		<xsl:param name="lib_id" select= "'undefined'" />
+		<xsl:param name="lib_id" select= "/notification_data/library/org_scope/library_id" />
 		<xsl:param name="letter_language" select = "/notification_data/receivers/receiver/user/user_preferred_language" />
-		<xsl:if test="$lib_id != '12900830000231'">
-			<!-- if not RS - cen. lib. -->
-			<table>
-				<tr>
-					<td>
-						<xsl:choose>
-							<xsl:when test="$letter_language != ''">
-								<xsl:if test="$letter_language = 'he'">
-									<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
-								</xsl:if>
-								<xsl:if test="$letter_language = 'en'">
+		<xsl:choose>
+			<xsl:when test="$lib_id = '12900830000231'">
+			<!-- if RS - cen. lib. do nothing -->
+			</xsl:when>
+			<xsl:otherwise>
+						<!-- if not RS - cen. lib. -->
+				<table>
+					<tr>
+						<td>
+							<xsl:choose>
+								<xsl:when test="$letter_language != ''">
+									<xsl:if test="$letter_language = 'he'">
+										<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
+									</xsl:if>
+									<xsl:if test="$letter_language = 'en'">
+										<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
+									</xsl:if>
+								</xsl:when>
+								<xsl:otherwise>
 									<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
-								</xsl:if>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
-							</xsl:otherwise>
-						</xsl:choose>					
-					</td>
-				</tr>
-			</table>
-		</xsl:if>
+								</xsl:otherwise>
+							</xsl:choose>					
+						</td>
+					</tr>
+				</table>
+			
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 </xsl:stylesheet>
