@@ -50,24 +50,19 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 			<div class="messageArea">
 				<div class="messageBody">
-					 <table cellspacing="0" cellpadding="5" border="0">
+					 <table cellspacing="0" cellpadding="3" border="0">
 
 						<tr>
-							<td>
+							<td valign="top">
 								<b>@@supplied_to@@: </b>
 								<xsl:value-of select="notification_data/partner_name"/>
 							</td>
-						</tr>
 
-			            <tr>
 			                <td>
 			                  <b>@@shipping_address@@: </b>
-			                </td>
-			            </tr>
-
-			            <xsl:for-each select="notification_data/partner_shipping_info_list/partner_shipping_info">
+							<xsl:for-each select="notification_data/partner_shipping_info_list/partner_shipping_info">
 							<br></br>
-							<table cellspacing="0" cellpadding="5" border="0">
+							<table cellspacing="0" cellpadding="3" border="0">
 								<xsl:attribute name="style">
 									<xsl:call-template name="listStyleCss" /> <!-- style.xsl -->
 								</xsl:attribute>
@@ -79,6 +74,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<tr><td><xsl:value-of select="state"/>&#160;<xsl:value-of select="country"/></td></tr>
 							</table>
 						</xsl:for-each>
+
+			                </td>
+			            </tr>
+
 
 					 <tr>
 								<td><b>@@email@@: </b> <xsl:value-of select="notification_data/email"/></td>
@@ -96,7 +95,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			                   <xsl:call-template name="id-info-hdr"/>
 			                </td>
 			         </tr>
-
+<!--
 			          <tr>
 							  <td><b>@@my_id@@: </b><img src="externalId.png" alt="externalId" /></td>
 				      </tr>
@@ -112,7 +111,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 								  <td><b>@@group_qualifier@@: </b><img src="group_qualifier.png" alt="group_qualifier" /></td>
 					      </tr>
 				      </xsl:if>
-
+-->
 						<tr>
 							<td>
 								<b>@@format@@: </b>
@@ -158,11 +157,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 						<xsl:if  test="notification_data/item">
 							<br></br>
-
+<!--
 							<tr>
 							  <td><b>@@item_barcode@@: </b><img src="Barcode1.png" alt="Barcode1" /></td>
 							</tr>
-
+-->
 							<tr>
 								<td><xsl:value-of select="notification_data/item/title"/></td>
 							</tr>
@@ -214,6 +213,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			                 </td>
 			            </tr>
 
+						<!-- rs_dept_details details here from footer.xsl-->
+						<tr><td><br/></td></tr>
+						<xsl:call-template name="rs_dept_details">
+							<xsl:with-param name="lib_id" select="/notification_data/incoming_request/library_id" />
+							<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
+							<xsl:with-param name="lib_name" select="/notification_data/item/owning_library_details/name" /> 
+						</xsl:call-template>
 
 
 					</table>
@@ -222,13 +228,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 
 
-
+	<!-- rs_dept_details from footer.xsl-->
 	<xsl:call-template name="lastFooter" /> <!-- footer.xsl -->
-
-
-
-
-
 </body>
 </html>
 
