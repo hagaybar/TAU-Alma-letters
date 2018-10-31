@@ -115,7 +115,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='he'">
 				<tr>
 					<td>
-						<b>מדור השאלה בין-ספרייתית</b>
+						<b>מדור השאלה בינספרייתית</b>
 					</td>
 				</tr>
 				<tr>
@@ -156,7 +156,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='he'">
 			<tr>
 					<td>
-						<b>מדור השאלה בין-ספרייתית</b>
+						<b>שירותי השאלה בינספרייתית ואספקת פרסומים</b>
 					</td>
 				</tr>
 				<tr>
@@ -176,7 +176,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			
 				<tr>
 					<td>
-						<b>Interlibrary Loan Department</b>
+						<b>Interlibrary Loan and Document Delivery Services</b>
 					</td>
 				</tr>
 				<tr>
@@ -198,7 +198,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='he'">
 				<tr>
 					<td>
-						<b>מדור השאלה בין-ספרייתית</b>
+						<b>מדור השאלה בינספרייתית</b>
 					</td>
 				</tr>
 				<tr>
@@ -238,7 +238,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='he'">
 				<tr>
 					<td>
-						<b>מדור השאלה בין-ספרייתית</b>
+						<b>מדור השאלה בינספרייתית</b>
 					</td>
 				</tr>
 				<tr>
@@ -277,7 +277,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='he'">
 				<tr>
 					<td>
-						<b>מדור השאלה בין-ספרייתית</b>
+						<b>השאלה בינספרייתית</b>
 					</td>
 				</tr>
 				<tr>
@@ -295,7 +295,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:if test="$language='en'">
 				<tr>
 					<td>
-						<b>Interlibrary Loan Department</b>
+						<b>Interlibrary Loan</b>
 					</td>
 				</tr>
 				<tr>
