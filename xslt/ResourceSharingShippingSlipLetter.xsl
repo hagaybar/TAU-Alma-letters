@@ -161,7 +161,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<tr>
 							  <td><b>@@item_barcode@@: </b><img src="Barcode1.png" alt="Barcode1" /></td>
 							</tr>
--->
+
 							<tr>
 								<td><xsl:value-of select="notification_data/item/title"/></td>
 							</tr>
@@ -172,7 +172,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<xsl:value-of select="notification_data/item/library_name"/>
 								</td>
 							</tr>
-
+-->
 							<tr>
 								<td><b>@@location@@: </b><xsl:value-of select="notification_data/item/location_name"/></td>
 							</tr>
@@ -202,16 +202,24 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			                    <b>@@title@@: </b>
      			                  <xsl:value-of select="notification_data/metadata/title"/>
                                   &#160;
+<!--
                                 <b>@@author@@: </b>
 			                      <xsl:value-of select="notification_data/metadata/author"/>
                                   &#160;
-             	                <b>@@volume@@: </b>
-			                      <xsl:value-of select="notification_data/metadata/volume"/>
-			                      &#160;
-			                    <b>@@issue@@: </b>
-			                      <xsl:value-of select="notification_data/metadata/issue"/>
-			                 </td>
-			            </tr>
+-->
+								<xsl:if  test="notification_data/metadata/volume != ''" >
+									<b>@@volume@@: </b>
+									  <xsl:value-of select="notification_data/metadata/volume"/>
+									  &#160;
+								</xsl:if>
+								
+								<xsl:if  test="notification_data/metadata/issue != ''" >
+									<b>@@issue@@: </b>
+									  <xsl:value-of select="notification_data/metadata/issue"/>
+								</xsl:if>
+			                </td>
+						  </tr>
+						  &#160;
 
 						<!-- rs_dept_details details here from footer.xsl-->
 						<tr><td><br/></td></tr>
