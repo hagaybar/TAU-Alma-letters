@@ -261,7 +261,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<tr>
 			<td>
 				<b>
-					<xsl:value-of select="$rs_phone" /> | <a href="mailto:{$rs_email}">
+					<xsl:value-of select="$rs_phone" /> | 
+					<xsl:choose>
+						<xsl:when test="$letter_language = 'he'">
+						דוא"ל:
+						</xsl:when>
+						<xsl:otherwise>
+						Email:
+						</xsl:otherwise>
+					</xsl:choose>
+					
+					<a href="mailto:{$rs_email}">
 						<xsl:value-of select="$rs_email"/>
 					</a>
 				</b>
