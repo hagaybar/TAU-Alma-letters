@@ -88,8 +88,12 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 
 <xsl:variable name="lib_name">
 	<xsl:choose>
-	<xsl:when>
-	</xsl:when>
+		<xsl:when test="notification_data/library/name != ''"> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters --> -->
+			<xsl:value-of select="notification_data/library/name" />
+		</xsl:when>
+		<xsl:when test="notification_data/organization_unit/name != ''"> <!-- for FulPlaceOnHoldShelfLetter -->
+			<xsl:value-of select="notification_data/library/name" />
+		</xsl:when>
 	<xsl:otherwise>
 	</xsl:otherwise>
 	</xsl:choose>
@@ -131,7 +135,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -150,7 +154,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -172,7 +176,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -192,7 +196,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -214,7 +218,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -233,7 +237,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -254,7 +258,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -273,7 +277,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b><xsl:value-of select="notification_data/library/name" /></b>
+						<b><xsl:value-of select="$lib_name" /></b>
 					</td>
 				</tr>
 				<tr>
