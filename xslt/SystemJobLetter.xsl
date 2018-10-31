@@ -9,6 +9,9 @@
   <xsl:include href="recordTitle.xsl" />
 
   <xsl:template match="/">
+  <xsl:if test="report_header/creator='System'">
+		<xsl:message terminate="yes">don't send this letter</xsl:message>
+  </xsl:if>
 	<html>
 	  <head>
 	    <xsl:call-template name="generalStyle" />
