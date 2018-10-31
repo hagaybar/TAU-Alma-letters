@@ -67,26 +67,33 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</xsl:choose>
 </xsl:template>
 
-<!-- a do-not-reply message in hebrew and english -->
-	<!-- maybe this will work -->
 
-<xsl:template name="donotreply">
-	<table>
-		<tr>
-			<td>
-				<xsl:choose>
-					<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
-						<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-			</td>
-		</tr>
-	</table>
-</xsl:template>
+<!-- 'lib_id' contains the unique id of the library We have two options, 
+for GeneralMessageEmailLetter and Patron Query Type Letters, the path for the language value will be: /notification_data/library/org_scope/library_id
+for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/organization_unit/org_scope/library_id
+ --> 		
+<xsl:variable name="lib_id">
+	<xsl:choose>
+		<xsl:when test="/notification_data/library/org_scope/library_id != ''"> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters -->
+			<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+		</xsl:when>
+		<xsl:when test="/notification_data/organization_unit/org_scope/library_id != ''"> <!-- for FulPlaceOnHoldShelfLetter letter type -->
+			<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id" /> 
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="/notification_data/incoming_request/library_id" /> <!-- for ResourceSharingShippingSlipLetter letter type -->
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable> 
 
+<xsl:variable name="lib_name">
+	<xsl:choose>
+	<xsl:when>
+	</xsl:when>
+	<xsl:otherwise>
+	</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
 
 <!-- this template add the rs Department email to letters based on the library from which the letter is sent from
      this template currently work for letters of the following types: 
@@ -95,29 +102,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		Patron Query Type, 
 		FulPlaceOnHoldShelfLetter  
 -->
-
-
-<!-- 'lib_id' contains the unique id of the library We have two options, 
-for GeneralMessageEmailLetter and Patron Query Type Letters, the path for the language value will be: /notification_data/library/org_scope/library_id
-for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/organization_unit/org_scope/library_id
- --> 		
-
- <!-- get library id parm from XML -->
-<xsl:variable name="lib_id">
-	<xsl:choose>
-		<xsl:when test="/notification_data/library/org_scope/library_id"> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters -->
-			<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id" /> <!-- for FulPlaceOnHoldShelfLetter letter type -->
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:variable> 
-
-
-
 <xsl:template name="rs_dept_details"> 
-
 
 <!-- detects where the perffered language is located and get the value-->
 <xsl:variable name="language">
@@ -313,7 +298,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				</tr>
 				<tr>
 					<td>
-						<b>טלפון: <xsl:value-of select="/notification_data/library/phone/phone" />| דוא"ל: <a href="{notification_data/library/email/email}"><xsl:value-of select="notification_data/library/email/email"/></a></b>
+						<b>טלפון: 972-3-6408746| דוא"ל: <a href="mailto:cenloan@tauex.tau.ac.il">cenloan@tauex.tau.ac.il</a></b>
 					</td>
 				</tr>
 				<br></br>
@@ -332,7 +317,7 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 				<tr>
 					<td>
 
-						<b>Phone: <xsl:value-of select="/notification_data/library/phone/phone" /> | Email: <a href="{notification_data/library/email/email}"><xsl:value-of select="notification_data/library/email/email"/></a></b>
+						<b>Phone: 972-3-6408746 | Email: <a href="mailto:cenloan@tauex.tau.ac.il">cenloan@tauex.tau.ac.il</a></b>
 					</td>
 				</tr>
 				<br></br>
@@ -346,7 +331,6 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 
 <!-- the following template currently working for the GeneralMessageEmailLetter, not tested on other templates yet -->
 <xsl:template name="rs_copyright">
-<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
 	<xsl:choose>
 		<xsl:when test = "/notification_data/languages/string != 'he'">
 			<tr>
@@ -372,7 +356,27 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
-	
 
+
+<!-- a do-not-reply message in hebrew and english, does not apply to RS - cen. lib.-->
+
+<xsl:template name="donotreply">
+	<xsl:if test="$lib_id != '12900830000231'"> <!-- if not RS - cen. lib. -->
+		<table>
+			<tr>
+				<td>
+					<xsl:choose>
+						<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+							<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
+			</tr>
+		</table>
+	</xsl:if>
+</xsl:template>
 
 </xsl:stylesheet>
