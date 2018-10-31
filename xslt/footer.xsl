@@ -67,17 +67,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template name="reason">
-	<xsl:choose>
-		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
-			<xsl:text>סיבה</xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>Reason</xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
 <!-- a do-not-reply message in hebrew and english -->
 	<!-- maybe this will work -->
 
@@ -106,7 +95,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		Patron Query Type, 
 		FulPlaceOnHoldShelfLetter  
 -->
-<xsl:template name="rs_dept_details"> 
+
 
 <!-- 'lib_id' contains the unique id of the library We have two options, 
 for GeneralMessageEmailLetter and Patron Query Type Letters, the path for the language value will be: /notification_data/library/org_scope/library_id
@@ -124,6 +113,11 @@ for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/org
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable> 
+
+
+
+<xsl:template name="rs_dept_details"> 
+
 
 <!-- detects where the perffered language is located and get the value-->
 <xsl:variable name="language">
