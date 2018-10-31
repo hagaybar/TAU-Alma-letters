@@ -88,14 +88,23 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 
-<!-- this template add the rs dept. email to a letter, based on the library from which the letter is sent from. -->
+<!-- this template add the rs Department email to a GeneralMessageEmailLetter and Patron Query Type Letters, based on the library from which the letter is sent from. -->
 <xsl:template name="rs_dept_details"> 
 
 <!-- 'lib_id' contains the unique id of the library, for each loan listed in the letter --> 				
-	<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
+<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
 
-<!-- 'lib_id' contains the unique id of the library, for each loan listed in the letter --> 				
-
+<!-- detects where the perffered language is located and get the value-->
+<xsl:variable name="language">
+	<xsl:choose>
+		<xsl:when test="/notification_data/receivers/receiver/preferred_language">
+			<xsl:value-of select="/notification_data/receivers/receiver/preferred_language"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="/notification_data/languages/string" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
 	
 	
 <!-- 'rs_email' contains the library's email address, its value is determined according to the value of 'lib_id' (from which library the loan was made). -->
@@ -103,68 +112,241 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:choose>
 		
 		<xsl:when test="$lib_id = '190896720004146'"> <!-- law library -->
-			<xsl:if test="/notification_data/languages/string='he'">
-			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
-			<br></br>
+			<xsl:if test="$language='he'">
+				<tr>
+					<td>
+						<b>מדור השאלה בין-ספרייתית</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>טלפון: 03-6406177 | דוא"ל: <a href="mailto:hanal@post.tau.ac.il">hanal@post.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
+			</xsl:if>
+
+			<xsl:if test="$language='en'">
+				<tr>
+					<td>
+						<b>Interlibrary Loan Department</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Phone: 03-6406177 | Email: <a href="mailto:hanal@post.tau.ac.il">hanal@post.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
 			</xsl:if>
 			
-			<xsl:if test="/notification_data/languages/string='en'">
-			<xsl:text>Inter-Library Loan Dept.</xsl:text>
-			<br></br>
-			</xsl:if>
-			<a href="mailto:hanal@post.tau.ac.il">hanal@post.tau.ac.il</a>
-			<br></br>
-			<xsl:text>03-6406177</xsl:text>
 		</xsl:when>
 		
 		<xsl:when test="$lib_id = '190893010004146'"> <!-- social sciences library -->
-			<xsl:if test="/notification_data/languages/string='he'">
-			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
-			<br></br>
+			<xsl:if test="$language='he'">
+			<tr>
+					<td>
+						<b>מדור השאלה בין-ספרייתית</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>טלפון: 03-6407066 ; 03-6405504 | פקס: 03-6407840 | דוא"ל: <a href="mailto:SMLILL@tauex.tau.ac.il">SMLILL@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
+			</xsl:if>
+
+			<xsl:if test="$language='en'">
+			
+				<tr>
+					<td>
+						<b>Interlibrary Loan Department</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Phone: 03-6407066 ; 03-6405504 | Fax: 03-6407840 | Email: <a href="mailto:SMLILL@tauex.tau.ac.il">SMLILL@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
 			</xsl:if>
 			
-			<xsl:if test="/notification_data/languages/string='en'">
-			<xsl:text>Inter-Library Loan Dept.</xsl:text>
-			<br></br>
-			</xsl:if>
-			<a href="mailto:SMLILL@tauex.tau.ac.il">SMLILL@tauex.tau.ac.il</a>
-			<br></br>
-			<xsl:text>03-6405504 ; 03-6407066 </xsl:text>
 		</xsl:when>
 		
 		<xsl:when test="$lib_id = '190902540004146'"> <!-- exact sciences library -->
-			<xsl:if test="/notification_data/languages/string='he'">
-			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
-			<br></br>
-			</xsl:if>
+			<xsl:if test="$language='he'">
+				<tr>
+					<td>
+						<b>מדור השאלה בין-ספרייתית</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>טלפון: 03-6409269 | דוא"ל: <a href="mailto:tusill@tauex.tau.ac.il">tusill@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
+			</xsl:if>			
 			
-			<xsl:if test="/notification_data/languages/string='en'">
-			<xsl:text>Inter-Library Loan Dept.</xsl:text>
-			<br></br>
+			<xsl:if test="$language='en'">
+				<tr>
+					<td>
+						<b>Interlibrary Loan Department</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Phone: 03-6409269 | Email: <a href="mailto:tusill@tauex.tau.ac.il">tusill@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
 			</xsl:if>
-			<a href="mailto:tusill@tauex.tau.ac">tusill@tauex.tau.ac</a>
-			<br></br>
-			<xsl:text>03-6406269</xsl:text>
 		</xsl:when>
 		
 		<xsl:when test="$lib_id = '190899330004146'"> <!-- life sciences library -->
-			<xsl:if test="/notification_data/languages/string='he'">
-			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
-			<br></br>
+			<xsl:if test="$language='he'">
+				<tr>
+					<td>
+						<b>מדור השאלה בין-ספרייתית</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>טלפון: 03-6407966; 03-6409752 | דוא"ל: <a href="mailto:illmail@tauex.tau.ac.il">illmail@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
 			</xsl:if>
-			
-			<xsl:if test="/notification_data/languages/string='en'">
-			<xsl:text>Inter-Library Loan Dept.</xsl:text>
-			<br></br>
+						
+			<xsl:if test="$language='en'">
+				<tr>
+					<td>
+						<b>Interlibrary Loan Department</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b><xsl:value-of select="notification_data/library/name" /></b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Phone: 03-6407966; 03-6409752 | Email: <a href="mailto:illmail@tauex.tau.ac.il">illmail@tauex.tau.ac.il</a></b>
+					</td>
+				</tr>
+				<br></br>
+			</xsl:if>	
+		</xsl:when>
+		<xsl:when test="$lib_id = '12900830000231'"> <!-- Central Library (resource sharing) -->
+			<xsl:if test="$language='he'">
+				<tr>
+					<td>
+						<b>מדור השאלה בין-ספרייתית</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>הספרייה המרכזית ע&quot;ש סוראסקי</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>טלפון: <xsl:value-of select="/notification_data/library/phone/phone" />| דוא"ל: <a href="{notification_data/library/email/email}"><xsl:value-of select="notification_data/library/email/email"/></a></b>
+					</td>
+				</tr>
+				<br></br>
 			</xsl:if>
-			<a href="mailto:illmail@tauex.tau.ac">illmail@tauex.tau.ac</a>
-			<br></br>
-			<xsl:text>03-6407966; 03-6409752</xsl:text>
+			<xsl:if test="$language='en'">
+				<tr>
+					<td>
+						<b>Interlibrary Loan Department</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Sourasky Central Library</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+
+						<b>Phone: <xsl:value-of select="/notification_data/library/phone/phone" /> | Email: <a href="{notification_data/library/email/email}"><xsl:value-of select="notification_data/library/email/email"/></a></b>
+					</td>
+				</tr>
+				<br></br>
+			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
 		</xsl:otherwise>
 	</xsl:choose>
 	
 </xsl:template>
+
+<!-- the following template currently working for the GeneralMessageEmailLetter, not tested on other templates yet -->
+<xsl:template name="rs_copyright">
+<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
+	<xsl:choose>
+		<xsl:when test = "/notification_data/languages/string != 'he'">
+			<tr>
+				<td><b>Please note: Articles/Chapters may be used for research and study purposes only.</b></td>
+			</tr>
+			<xsl:if test="$lib_id = '12900830000231'"> <!-- RS - cen. lib. -->
+			<tr>
+				<td><b>***The link will be accessible for TWO weeks only.***</b></td>
+			</tr>
+			</xsl:if>
+		</xsl:when>
+
+		<xsl:otherwise>
+		<tr>
+			<td><b>לתשומת לבך: השימוש בפריט זה מותר לצורכי מחקר ולימוד בלבד.</b></td>
+		</tr>
+		
+			<xsl:if test="$lib_id = '12900830000231'"> <!-- RS - cen. lib. -->
+				<tr>
+				<td><b>***הקובץ יישאר זמין להורדה במשך שבועיים מיום שליחת הודעה זו***</b></td>
+				</tr>
+			</xsl:if>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+	
+
 
 </xsl:stylesheet>
