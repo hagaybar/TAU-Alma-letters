@@ -53,6 +53,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</table>
 </xsl:template>
 
+
+<!-- a barcode lable in hebrew and english -->
+
+<xsl:template name="barcode">
+	<xsl:choose>
+		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+			<xsl:text>ברקוד</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>Barcode</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<!-- a do-not-reply message in hebrew and english -->
 <xsl:template name="donotreply">
 	<xsl:choose>
 		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
