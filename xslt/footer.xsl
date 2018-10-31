@@ -7,6 +7,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template name="salutation">
 
 </xsl:template>
+
 <xsl:template name="lastFooter">
 	<table>
 	<xsl:attribute name="style">
@@ -19,7 +20,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:call-template name="listStyleCss" /> <!-- style.xsl -->
 		</xsl:attribute>
 			<td align="center"><xsl:value-of select="name"/>&#160;<xsl:value-of select="line1"/>&#160;<xsl:value-of select="line2"/>&#160;<xsl:value-of select="city"/>&#160;<xsl:value-of select="postal_code"/>&#160;<xsl:value-of select="country"/></td>
-
 	</xsl:for-each>
 	</tr>
 	</table>
@@ -68,15 +68,25 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 <!-- a do-not-reply message in hebrew and english -->
+	<!-- maybe this will work -->
+
 <xsl:template name="donotreply">
-	<xsl:choose>
-		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
-			<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
+	<table>
+		<tr>
+			<td>
+				<xsl:choose>
+					<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+						<xsl:text>הודעה זו נשלחה דרך מערכת אוטומטית שאינה מקבלת הודעות, אין להשיב לכתובת ממנה נשלחה ההודעה.</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>This message was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+			</td>
+		</tr>
+	</table>
 </xsl:template>
+
+
 
 </xsl:stylesheet>
