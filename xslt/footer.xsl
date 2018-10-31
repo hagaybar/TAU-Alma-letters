@@ -67,6 +67,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	</xsl:choose>
 </xsl:template>
 
+<xsl:template name="reason">
+	<xsl:choose>
+		<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+			<xsl:text>סיבה</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>Reason</xsl:text>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
 <!-- a do-not-reply message in hebrew and english -->
 	<!-- maybe this will work -->
 
@@ -88,17 +99,38 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 
-<!-- this template add the rs Department email to a GeneralMessageEmailLetter and Patron Query Type Letters, based on the library from which the letter is sent from. -->
+<!-- this template add the rs Department email to letters based on the library from which the letter is sent from
+     this template currently work for letters of the following types: 
+
+		GeneralMessageEmailLetter,
+		Patron Query Type, 
+		FulPlaceOnHoldShelfLetter  
+-->
 <xsl:template name="rs_dept_details"> 
 
-<!-- 'lib_id' contains the unique id of the library, for each loan listed in the letter --> 				
-<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
+<!-- 'lib_id' contains the unique id of the library We have two options, 
+for GeneralMessageEmailLetter and Patron Query Type Letters, the path for the language value will be: /notification_data/library/org_scope/library_id
+for FulPlaceOnHoldShelfLetter the language value will be: /notification_data/organization_unit/org_scope/library_id
+ --> 		
+
+ <!-- get library id parm from XML -->
+<xsl:variable name="lib_id">
+	<xsl:choose>
+		<xsl:when test="/notification_data/library/org_scope/library_id"> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters -->
+			<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id" /> <!-- for FulPlaceOnHoldShelfLetter letter type -->
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable> 
 
 <!-- detects where the perffered language is located and get the value-->
 <xsl:variable name="language">
 	<xsl:choose>
-		<xsl:when test="/notification_data/receivers/receiver/preferred_language">
-			<xsl:value-of select="/notification_data/receivers/receiver/preferred_language"/>
+		<!-- the following condition is supposed to test if the element is empty; I assume that it returns FALSE also when the element does not exist need to test it -->
+		<xsl:when test="/notification_data/receivers/receiver/preferred_language != ''">
+			<xsl:value-of select="/notification_data/receivers/receiver/preferred_language"/> <!-- for GeneralMessageEmailLetter and Patron Query Type Letters -->
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="/notification_data/languages/string" />
