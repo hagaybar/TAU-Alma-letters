@@ -88,5 +88,83 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 
+<!-- this template add the rs dept. email to a letter, based on the library from which the letter is sent from. -->
+<xsl:template name="rs_dept_details"> 
+
+<!-- 'lib_id' contains the unique id of the library, for each loan listed in the letter --> 				
+	<xsl:variable name="lib_id" select="/notification_data/library/org_scope/library_id" />
+
+<!-- 'lib_id' contains the unique id of the library, for each loan listed in the letter --> 				
+
+	
+	
+<!-- 'rs_email' contains the library's email address, its value is determined according to the value of 'lib_id' (from which library the loan was made). -->
+	
+	<xsl:choose>
+		
+		<xsl:when test="$lib_id = '190896720004146'"> <!-- law library -->
+			<xsl:if test="/notification_data/languages/string='he'">
+			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
+			<br></br>
+			</xsl:if>
+			
+			<xsl:if test="/notification_data/languages/string='en'">
+			<xsl:text>Inter-Library Loan Dept.</xsl:text>
+			<br></br>
+			</xsl:if>
+			<a href="mailto:hanal@post.tau.ac.il">hanal@post.tau.ac.il</a>
+			<br></br>
+			<xsl:text>03-6406177</xsl:text>
+		</xsl:when>
+		
+		<xsl:when test="$lib_id = '190893010004146'"> <!-- social sciences library -->
+			<xsl:if test="/notification_data/languages/string='he'">
+			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
+			<br></br>
+			</xsl:if>
+			
+			<xsl:if test="/notification_data/languages/string='en'">
+			<xsl:text>Inter-Library Loan Dept.</xsl:text>
+			<br></br>
+			</xsl:if>
+			<a href="mailto:SMLILL@tauex.tau.ac.il">SMLILL@tauex.tau.ac.il</a>
+			<br></br>
+			<xsl:text>03-6405504 ; 03-6407066 </xsl:text>
+		</xsl:when>
+		
+		<xsl:when test="$lib_id = '190902540004146'"> <!-- exact sciences library -->
+			<xsl:if test="/notification_data/languages/string='he'">
+			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
+			<br></br>
+			</xsl:if>
+			
+			<xsl:if test="/notification_data/languages/string='en'">
+			<xsl:text>Inter-Library Loan Dept.</xsl:text>
+			<br></br>
+			</xsl:if>
+			<a href="mailto:tusill@tauex.tau.ac">tusill@tauex.tau.ac</a>
+			<br></br>
+			<xsl:text>03-6406269</xsl:text>
+		</xsl:when>
+		
+		<xsl:when test="$lib_id = '190899330004146'"> <!-- life sciences library -->
+			<xsl:if test="/notification_data/languages/string='he'">
+			<xsl:text>מדור השאלה בין-ספרייתית</xsl:text>
+			<br></br>
+			</xsl:if>
+			
+			<xsl:if test="/notification_data/languages/string='en'">
+			<xsl:text>Inter-Library Loan Dept.</xsl:text>
+			<br></br>
+			</xsl:if>
+			<a href="mailto:illmail@tauex.tau.ac">illmail@tauex.tau.ac</a>
+			<br></br>
+			<xsl:text>03-6407966; 03-6409752</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+		</xsl:otherwise>
+	</xsl:choose>
+	
+</xsl:template>
 
 </xsl:stylesheet>
