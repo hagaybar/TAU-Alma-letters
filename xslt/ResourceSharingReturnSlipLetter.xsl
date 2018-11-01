@@ -169,6 +169,13 @@
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
+							<!-- rs_dept_details details here from footer.xsl-->
+							<xsl:call-template name="rs_dept_details">
+								 <xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+								 <xsl:with-param name="letter_language" select="/notification_data/languages/string" />
+								 <xsl:with-param name="lib_name" select="/notification_data/library/name" /> 
+							</xsl:call-template>
+							<!-- all address lines are commented out
 							<tr>
 								<td>
 									<xsl:value-of select="notification_data/library/name"/>
@@ -224,11 +231,16 @@
 								</tr>
 
 							</xsl:if>
+							-->
 						</table>
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter"/>
 				<!-- footer.xsl -->
+				<xsl:call-template name="donotreply">
+					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+					<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
+				</xsl:call-template>
 			</body>
 		</html>
 	</xsl:template>
