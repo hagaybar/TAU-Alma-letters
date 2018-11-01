@@ -56,31 +56,50 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 										<xsl:call-template name="mainTableStyleCss" />
 									</xsl:attribute>
 									<tr align="center" bgcolor="#f5f5f5">
-										<td colspan="6">
-											<h3><xsl:value-of select="organization_unit/name" /></h3>
-											<!-- library email address -->
-                                            <br /> <a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
-											<!-- library phone number -->
-											<br /> <xsl:value-of select="organization_unit/phone/phone" />
+										<td colspan="5">
+										<!-- add cell padding to the table ? <table cellpadding="10"></table> -->
+											<table cellpadding="20">
+												<tr align="center" bgcolor="#f5f5f5">
+													<td align="center" colspan="2">
+														<!-- library name -->
+														<h3><xsl:value-of select="organization_unit/name" /></h3>
+													</td>
+													<td align="center">
+														<!-- library phone number -->
+														<xsl:value-of select="organization_unit/phone/phone" />
+													</td>
+													<td align="center">
+														<!-- library email address -->
+														<a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
+													</td>
+
+												</tr>
+											</table>
 										</td>
 									</tr>
 									<tr>
 										<th>@@title@@</th>
 										<th>@@description@@</th>
-										<th>@@author@@</th>
-										<th>@@due_date@@</th>
+										<th>@@call_number@@</th>
 										<th>@@fine@@</th>
+										<th>@@due_date@@</th>
+										<!-- 
+										<th>@@author@@</th>
 										<th>@@library@@</th>
+										-->
 									</tr>
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
 											<td><xsl:value-of select="title"/></td>
 											<td><xsl:value-of select="description"/></td>
-											<td><xsl:value-of select="author"/></td>
-											<td><xsl:value-of select="due_date"/></td>
+											<td><xsl:value-of select="call_number"/></td>
 											<td><xsl:value-of select="fine"/></td>
+											<td><xsl:value-of select="due_date"/></td>
+											<!--
+											<td><xsl:value-of select="author"/></td>
 											<td><xsl:value-of select="library_name"/></td>
+											-->
 										</tr>
 									</xsl:for-each>
 								</table>
@@ -106,27 +125,40 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 										<xsl:call-template name="mainTableStyleCss" />
 									</xsl:attribute>
 									<tr align="center" bgcolor="#f5f5f5">
-										<td colspan="4">
-											<h3><xsl:value-of select="organization_unit/name" /></h3>
-											<!-- library email address -->
-											<br /> <a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
-											<!-- library phone number -->
-											<br /> <xsl:value-of select="organization_unit/phone/phone" />
+										<td colspan="5">
+										<table cellpadding="20">
+												<tr align="center" bgcolor="#f5f5f5">
+													<td align="center" colspan="2">
+														<!-- library name -->
+														<h3><xsl:value-of select="organization_unit/name" /></h3>
+													</td>
+													<td align="center">
+													<!-- library phone number -->
+														<xsl:value-of select="organization_unit/phone/phone" />
+													</td>
+													<td align="center">
+														<!-- library email address -->
+														<a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
+													</td>
+												</tr>
+											</table>
 										</td>
 									</tr>
 									<tr>
 										<th>@@title@@</th>
-										<th>@@due_date@@</th>
-										<th>@@fine@@</th>
 										<th>@@description@@</th>
+										<th>@@call_number@@</th>
+										<th>@@fine@@</th>
+										<th>@@due_date@@</th>
 									</tr>
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
 											<td><xsl:value-of select="title"/></td>
-											<td><xsl:value-of select="due_date"/></td>
-											<td><xsl:value-of select="fine"/></td>
 											<td><xsl:value-of select="description"/></td>
+											<td><xsl:value-of select="call_number"/></td>
+											<td><xsl:value-of select="fine"/></td>
+											<td><xsl:value-of select="due_date"/></td>
 										</tr>
 									</xsl:for-each>
 								</table>
