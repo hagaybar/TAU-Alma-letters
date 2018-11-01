@@ -20,8 +20,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         </xsl:attribute>
 
         <xsl:call-template name="head" /><!-- header.xsl -->
-        <xsl:call-template name="senderReceiver" /> <!-- SenderReceiver.xsl -->
-
+        <xsl:call-template name="senderReceiverExtended" />  <!-- SenderReceiver.xsl -->
+		
 		<br />
 		<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
 
@@ -58,7 +58,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<tr align="center" bgcolor="#f5f5f5">
 										<td colspan="6">
 											<h3><xsl:value-of select="organization_unit/name" /></h3>
-                                            <br /><xsl:value-of select="organization_unit/email/email" />
+											<!-- library email address -->
+                                            <br /> <a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
+											<!-- library phone number -->
+											<br /> <xsl:value-of select="organization_unit/phone/phone" />
 										</td>
 									</tr>
 									<tr>
@@ -105,7 +108,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<tr align="center" bgcolor="#f5f5f5">
 										<td colspan="4">
 											<h3><xsl:value-of select="organization_unit/name" /></h3>
-                                            <br /><xsl:value-of select="organization_unit/email/email" />
+											<!-- library email address -->
+											<br /> <a href="mailto:{organization_unit/email/email}"><xsl:value-of select="organization_unit/email/email" /></a>
+											<!-- library phone number -->
+											<br /> <xsl:value-of select="organization_unit/phone/phone" />
 										</td>
 									</tr>
 									<tr>
