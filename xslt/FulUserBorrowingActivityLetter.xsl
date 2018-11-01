@@ -20,7 +20,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         </xsl:attribute>
 
         <xsl:call-template name="head" /><!-- header.xsl -->
-        <xsl:call-template name="senderReceiverExtended" />  <!-- SenderReceiver.xsl -->
+        <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
 		
 		<br />
 		<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
@@ -80,7 +80,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<tr>
 										<th>@@title@@</th>
 										<th>@@description@@</th>
-										<th>@@call_number@@</th>
+										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 										<th>@@fine@@</th>
 										<th>@@due_date@@</th>
 										<!-- 
@@ -93,7 +93,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 										<tr>
 											<td><xsl:value-of select="title"/></td>
 											<td><xsl:value-of select="description"/></td>
-											<td><xsl:value-of select="call_number"/></td>
+											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
 											<td><xsl:value-of select="due_date"/></td>
 											<!--
@@ -147,7 +147,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<tr>
 										<th>@@title@@</th>
 										<th>@@description@@</th>
-										<th>@@call_number@@</th>
+										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 										<th>@@fine@@</th>
 										<th>@@due_date@@</th>
 									</tr>
@@ -156,7 +156,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 										<tr>
 											<td><xsl:value-of select="title"/></td>
 											<td><xsl:value-of select="description"/></td>
-											<td><xsl:value-of select="call_number"/></td>
+											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
 											<td><xsl:value-of select="due_date"/></td>
 										</tr>
@@ -213,6 +213,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
         <!-- footer.xsl -->
         <xsl:call-template name="lastFooter" />
+		<xsl:call-template name="donotreply" />
          <!-- 
         <xsl:call-template name="myAccount" />
 		<xsl:call-template name="contactUs" />
