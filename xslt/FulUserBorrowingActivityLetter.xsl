@@ -56,7 +56,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 										<xsl:call-template name="mainTableStyleCss" />
 									</xsl:attribute>
 									<tr align="center" bgcolor="#f5f5f5">
-										<td colspan="5">
+										<td colspan="4">
 										<!-- add cell padding to the table ? <table cellpadding="10"></table> -->
 											<table cellpadding="20">
 												<tr align="center" bgcolor="#f5f5f5">
@@ -79,27 +79,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									</tr>
 									<tr>
 										<th>@@title@@</th>
-										<th>@@description@@</th>
 										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 										<th>@@fine@@</th>
 										<th>@@due_date@@</th>
-										<!-- 
-										<th>@@author@@</th>
-										<th>@@library@@</th>
-										-->
+
 									</tr>
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
-											<td><xsl:value-of select="title"/></td>
-											<td><xsl:value-of select="description"/></td>
+											<td><xsl:value-of select="title"/> <xsl:value-of select="description"/></td>
 											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
 											<td><xsl:value-of select="due_date"/></td>
-											<!--
-											<td><xsl:value-of select="author"/></td>
-											<td><xsl:value-of select="library_name"/></td>
-											-->
 										</tr>
 									</xsl:for-each>
 								</table>
@@ -120,7 +111,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<xsl:for-each select="notification_data/loans_by_library/library_loans_for_display">
 						<tr>
 							<td>
-								<table cellpadding="5" class="listing">
+								<table cellpadding="4" class="listing">
 									<xsl:attribute name="style">
 										<xsl:call-template name="mainTableStyleCss" />
 									</xsl:attribute>
@@ -146,19 +137,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									</tr>
 									<tr>
 										<th>@@title@@</th>
-										<th>@@description@@</th>
 										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 										<th>@@fine@@</th>
-										<th>@@due_date@@</th>
+										<!-- <th>@@due_date@@</th> -->
 									</tr>
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
-											<td><xsl:value-of select="title"/></td>
-											<td><xsl:value-of select="description"/></td>
+											<td><xsl:value-of select="title"/> <xsl:value-of select="description"/></td>
 											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
-											<td><xsl:value-of select="due_date"/></td>
+											<!-- <td><xsl:value-of select="due_date"/></td> -->
 										</tr>
 									</xsl:for-each>
 								</table>
@@ -176,12 +165,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<b>@@debt_message@@</b>
 	                </td>
 	              </tr>
-
-	              <xsl:for-each select="notification_data/organization_fee_list/string">
-	              	<tr>
-						<td><xsl:value-of select="."/></td>
-					</tr>
-	              </xsl:for-each>
+				  
+				  <xsl:call-template name="feeContactDetails" />
 
 				  <tr>
 	              	<td>
