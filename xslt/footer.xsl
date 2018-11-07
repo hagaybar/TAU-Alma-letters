@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- in test branch -->
+
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
@@ -502,7 +502,78 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			</td>
 		</tr>
 	</xsl:for-each>
+	
+	</xsl:template>
 
+	
+	
+	
+	<xsl:template name="feesTable">
+		<xsl:param name="letter_language" select = "/notification_data/receivers/receiver/user/user_preferred_language" />
+			<table cellpadding="5" class="listing">
+				<xsl:attribute name="style">
+					<xsl:call-template name="mainTableStyleCss" />
+				</xsl:attribute>
+					<tr align="center" bgcolor="#f5f5f5">
+						<td colspan="3">
+							<table cellpadding="20"> 
+								<tr align="center" bgcolor="#f5f5f5">
+									<td align="center" colspan="3">
+										<h3>debt_message</h3>
+									</td>							
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<xsl:choose>
+							<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
+								<th>ספרייה<!-- library name header (heb) --></th>
+								<th>סכום לתשלום<!-- fee amount header (heb) --></th>
+								<th>יצירת קשר<!-- contact us header (heb) --></th>
+							</xsl:when>
+						<!-- not Hebrew -->
+							<xsl:otherwise>
+								<th>lib. name<!-- library name header (eng) --></th>
+								<th>pay this<!-- fee amount header (eng) --></th>
+								<th>contact<!-- contact us header (eng)--></th>
+							</xsl:otherwise>
+						</xsl:choose>
+					</tr>
+					
+					<xsl:for-each select="notification_data/organization_fee_list/string">
+						<tr>
+							<xsl:choose> <!-- language start -->
+								<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
+									<xsl:choose> <!-- library start -->
+										<xsl:when test="contains(.,'הספרייה למדעי החברה, לניהול ולחינוך')">
+											<td>הספרייה למדעי החברה, לניהול ולחינוך</td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
+										</xsl:when>
+										
+										<xsl:otherwise>
+										
+										</xsl:otherwise>
+
+									</xsl:choose> <!-- library end  -->
+								</xsl:when>
+								
+								<xsl:otherwise> <!-- not Hebrew -->
+									
+									<xsl:choose> <!-- library start -->
+										<xsl:when test="contains(.,'Social Sciences, Management and Education Library')">
+											<td>Social Sciences, Management and Education Library</td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
+										</xsl:when>
+										<xsl:otherwise>
+										
+										</xsl:otherwise>
+									</xsl:choose> <!-- library end  -->
+								
+								</xsl:otherwise> <!-- not Hebrew -->
+								
+							</xsl:choose> <!-- language end  -->
+						</tr>
+					</xsl:for-each>
+			</table>
 	</xsl:template>
 
 </xsl:stylesheet>
