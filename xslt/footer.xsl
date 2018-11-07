@@ -409,7 +409,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
 								</xsl:when>
 								
-								<xsl:when test="contains(.,'השאלה בינספרייתית - הספרייה המרכזית') or contains(.,'Interlibrary Loan - Sourasky Central Library' or contains(.,'ILL - Sourasky Central Library')">
+								<xsl:when test="contains(.,'השאלה בינספרייתית - הספרייה המרכזית') or contains(.,'Interlibrary Loan - Sourasky Central Library') or contains(.,'ILL - Sourasky Central Library')">
 									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>972-3-6408746 | cenloan@tauex.tau.ac.il</td>
 								</xsl:when>
 								
