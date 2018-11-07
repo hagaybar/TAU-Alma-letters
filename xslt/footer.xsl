@@ -372,7 +372,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<td align="center" colspan="3">
 										<xsl:choose>
 											<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
-												<h3>תזכורת - קיים לך חוב</h3>
+												<h3 style="color:#ff9933;">תזכורת - קיים לך חוב</h3>
 											</xsl:when>
 											
 											<xsl:otherwise>
@@ -406,55 +406,55 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<xsl:choose> <!-- library selection  -->
 							
 								<xsl:when test="contains(.,'הספרייה למדעי החברה, לניהול ולחינוך') or contains(.,'Social Sciences, Management and Education Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6409085 | SMLCirc@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'השאלה בינספרייתית - הספרייה המרכזית') or contains(.,'Interlibrary Loan - Sourasky Central Library') or contains(.,'ILL - Sourasky Central Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>972-3-6408746 | cenloan@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">972-3-6408746 | cenloan@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה המרכזית ע&quot;ש סוראסקי') or contains(.,'Sourasky Central Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408662 | cenc@tauex.tau.ac.il </td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6408662 | cenc@tauex.tau.ac.il </td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה למשפטים ע&quot;ש דוד י. לייט') or contains(.,'The David J. Light Law Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408356 | lawlibdalpak@tauex.tau.ac.il </td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6408356 | lawlibdalpak@tauex.tau.ac.il </td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה לארכיאולוגיה') or contains(.,'Archaeology Sub-Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409023 | libarc@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6409023 | libarc@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה לאדריכלות') or contains(.,'Architecture Sub-Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6405535 | archlib@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6405535 | archlib@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה להפרעות בתקשורת, שיבא') or contains(.,'Communication Disorders Library, Sheba Hospital')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'﻿הספרייה למדעים מדויקים ולהנדסה') or contains(.,'﻿Exact Sciences and Engineering Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408145 | circulation@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6408145 | circulation@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'ספריית גיאוגרפיה') or contains(.,'Geography Sub-Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409044 | geogmaps@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6409044 | geogmaps@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה למדעי החיים ולרפואה') or contains(.,'Life Sciences and Medicine Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409195 | medcirc@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6409195 | medcirc@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'הספרייה לעבודה סוציאלית') or contains(.,'Social Work Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409183 | Estyr@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6409183 | Estyr@tauex.tau.ac.il</td>
 								</xsl:when>
 								
 								<xsl:when test="contains(.,'ספריית וינר') or contains(.,'Wiener Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>972-3-6407832 | wiener@tauex.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">972-3-6407832 | wiener@tauex.tau.ac.il</td>
 								</xsl:when>							
 								
 								<xsl:when test="contains(.,'הספרייה למוסיקה') or contains(.,'Music Sub-Library')">
-									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408716 | muslib@post.tau.ac.il</td>
+									<td align="center"><xsl:value-of select="substring-before(., ':')" /></td> <td align="center"><xsl:value-of select="substring-after(., ':')" /> </td> <td align="center">03-6408716 | muslib@post.tau.ac.il</td>
 								</xsl:when>
 
 								<xsl:otherwise>	</xsl:otherwise>
