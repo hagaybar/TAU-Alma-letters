@@ -356,158 +356,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</xsl:choose>
 	</xsl:template>
 	
-	<!-- feeContactDetails template adds library's contact details (phone number and email) to fee notifications which appears at the end of the FulUserBorrowingActivityLetter
+	<!-- feeTable template adds fees table with library's contact details (phone number and email) which appears at the end of the FulUserBorrowingActivityLetter
 	-->
-	
-	<xsl:template name="feeContactDetails">
-		<xsl:param name="letter_language" select = "/notification_data/receivers/receiver/user/user_preferred_language" />
-	<!-- use contains: contains('query', 'e') -->
-		 
-	<xsl:for-each select="notification_data/organization_fee_list/string">
-		<tr>
-			<td>
-				<xsl:value-of select="."/> <!-- fee message -->
-				<br />
 		
-				<xsl:choose> <!-- check language -->
-				
-					<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
-
-						<xsl:choose>  <!-- check library -->
-						
-							<xsl:when test="contains(.,'הספרייה למדעי החברה, לניהול ולחינוך')">
-								<b>03-6409085 | SMLCirc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'השאלה בינספרייתית - הספרייה המרכזית')">
-								<b>972-3-6408746 | cenloan@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'הספרייה המרכזית ע&quot;ש סוראסקי')">
-								<b>03-6408662 | cenc@tauex.tau.ac.il </b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'הספרייה למשפטים ע&quot;ש דוד י. לייט')">
-								<b>03-6408356 | lawlibdalpak@tauex.tau.ac.il </b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'הספרייה לארכיאולוגיה')">
-								<b>03-6409023 | libarc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-
-							<xsl:when test="contains(.,'הספרייה לאדריכלות')">
-								<b>03-6405535 | archlib@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-							
-							<xsl:when test="contains(.,'הספרייה להפרעות בתקשורת, שיבא')">
-								<b>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'﻿הספרייה למדעים מדויקים ולהנדסה')">
-								<b>03-6408145 | circulation@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'ספריית גיאוגרפיה')">
-								<b>03-6409044 | geogmaps@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'הספרייה למדעי החיים ולרפואה')">
-								<b>03-6409195 | medcirc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'הספרייה לעבודה סוציאלית')">
-								<b>03-6409183 | Estyr@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-
-							<xsl:when test="contains(.,'ספריית וינר')">
-								<b>972-3-6407832 | wiener@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-														
-							<xsl:when test="contains(.,'הספרייה למוסיקה')">
-								<b>03-6408716 | muslib@post.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-							
-							<xsl:otherwise>
-								<!-- <b><xsl:text>lib name not found</xsl:text></b> -->
-							</xsl:otherwise>
-							
-						</xsl:choose>
-						<br />
-					</xsl:when>
-					
-					<xsl:otherwise> <!-- not Hebrew -->
-					
-						<xsl:choose>  <!-- check library -->
-							<xsl:when test="contains(.,'Social Sciences, Management and Education Library')">
-								<b>03-6409085 | SMLCirc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Interlibrary Loan - Sourasky Central Library') or contains(.,'ILL - Sourasky Central Library')">
-								<b>972-3-6408746 | cenloan@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Sourasky Central Library')">
-								<b>03-6408662 | cenc@tauex.tau.ac.il </b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'The David J. Light Law Library')">
-								<b>03-6408356 | lawlibdalpak@tauex.tau.ac.il </b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Archaeology Sub-Library')">
-								<b>03-6409023 | libarc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Architecture Sub-Library')">
-								<b>03-6405535 | archlib@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Communication Disorders Library, Sheba Hospital')">
-								<b>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'﻿Exact Sciences and Engineering Library')">
-								<b>03-6408145 | circulation@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Geography Sub-Library')">
-								<b>03-6409044 | geogmaps@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Life Sciences and Medicine Library')">
-								<b>03-6409195 | medcirc@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>
-							
-							<xsl:when test="contains(.,'Social Work Library')">
-								<b>03-6409183 | Estyr@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-
-							<xsl:when test="contains(.,'Wiener Library')">
-								<b>972-3-6407832 | wiener@tauex.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-														
-							<xsl:when test="contains(.,'Music Sub-Library')">
-								<b>03-6408716 | muslib@post.tau.ac.il</b> <!-- contact details-->
-							</xsl:when>							
-														
-							<xsl:otherwise>
-								<!-- <b><xsl:text>lib name not found</xsl:text></b> -->
-							</xsl:otherwise>
-
-						</xsl:choose>
-						
-					</xsl:otherwise>
-
-				</xsl:choose>
-			</td>
-		</tr>
-	</xsl:for-each>
-	
-	</xsl:template>
-
-	
-	
-	
 	<xsl:template name="feesTable">
 		<xsl:param name="letter_language" select = "/notification_data/receivers/receiver/user/user_preferred_language" />
 			<table cellpadding="5" class="listing">
@@ -519,7 +370,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<table cellpadding="20"> 
 								<tr align="center" bgcolor="#f5f5f5">
 									<td align="center" colspan="3">
-										<h3>debt_message</h3>
+										<xsl:choose>
+											<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
+												<h3>תזכורת - קיים לך חוב</h3>
+											</xsl:when>
+											
+											<xsl:otherwise>
+												<h3>We would like to remind you that you have a debt</h3>
+											</xsl:otherwise>
+										</xsl:choose>
+										
 									</td>							
 								</tr>
 							</table>
@@ -530,47 +390,77 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
 								<th>ספרייה<!-- library name header (heb) --></th>
 								<th>סכום לתשלום<!-- fee amount header (heb) --></th>
-								<th>יצירת קשר<!-- contact us header (heb) --></th>
+								<th>פרטי התקשרות<!-- contact us header (heb) --></th>
 							</xsl:when>
 						<!-- not Hebrew -->
 							<xsl:otherwise>
-								<th>lib. name<!-- library name header (eng) --></th>
-								<th>pay this<!-- fee amount header (eng) --></th>
-								<th>contact<!-- contact us header (eng)--></th>
+								<th>Library<!-- library name header (eng) --></th>
+								<th>Fee Amount<!-- fee amount header (eng) --></th>
+								<th>Contact us<!-- contact us header (eng)--></th>
 							</xsl:otherwise>
 						</xsl:choose>
 					</tr>
 					
 					<xsl:for-each select="notification_data/organization_fee_list/string">
 						<tr>
-							<xsl:choose> <!-- language start -->
-								<xsl:when test ="$letter_language = 'he' "> <!-- Hebrew -->
-									<xsl:choose> <!-- library start -->
-										<xsl:when test="contains(.,'הספרייה למדעי החברה, לניהול ולחינוך')">
-											<td>הספרייה למדעי החברה, לניהול ולחינוך</td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
-										</xsl:when>
-										
-										<xsl:otherwise>
-										
-										</xsl:otherwise>
-
-									</xsl:choose> <!-- library end  -->
+							<xsl:choose> <!-- library selection  -->
+							
+								<xsl:when test="contains(.,'הספרייה למדעי החברה, לניהול ולחינוך') or contains(.,'Social Sciences, Management and Education Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
 								</xsl:when>
 								
-								<xsl:otherwise> <!-- not Hebrew -->
-									
-									<xsl:choose> <!-- library start -->
-										<xsl:when test="contains(.,'Social Sciences, Management and Education Library')">
-											<td>Social Sciences, Management and Education Library</td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409085 | SMLCirc@tauex.tau.ac.il</td>
-										</xsl:when>
-										<xsl:otherwise>
-										
-										</xsl:otherwise>
-									</xsl:choose> <!-- library end  -->
+								<xsl:when test="contains(.,'השאלה בינספרייתית - הספרייה המרכזית') or contains(.,'Interlibrary Loan - Sourasky Central Library' or contains(.,'ILL - Sourasky Central Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>972-3-6408746 | cenloan@tauex.tau.ac.il</td>
+								</xsl:when>
 								
-								</xsl:otherwise> <!-- not Hebrew -->
+								<xsl:when test="contains(.,'הספרייה המרכזית ע&quot;ש סוראסקי') or contains(.,'Sourasky Central Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408662 | cenc@tauex.tau.ac.il </td>
+								</xsl:when>
 								
-							</xsl:choose> <!-- language end  -->
+								<xsl:when test="contains(.,'הספרייה למשפטים ע&quot;ש דוד י. לייט') or contains(.,'The David J. Light Law Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408356 | lawlibdalpak@tauex.tau.ac.il </td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'הספרייה לארכיאולוגיה') or contains(.,'Archaeology Sub-Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409023 | libarc@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'הספרייה לאדריכלות') or contains(.,'Architecture Sub-Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6405535 | archlib@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'הספרייה להפרעות בתקשורת, שיבא') or contains(.,'Communication Disorders Library, Sheba Hospital')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'﻿הספרייה למדעים מדויקים ולהנדסה') or contains(.,'﻿Exact Sciences and Engineering Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408145 | circulation@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'ספריית גיאוגרפיה') or contains(.,'Geography Sub-Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409044 | geogmaps@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'הספרייה למדעי החיים ולרפואה') or contains(.,'Life Sciences and Medicine Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409195 | medcirc@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'הספרייה לעבודה סוציאלית') or contains(.,'Social Work Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6409183 | Estyr@tauex.tau.ac.il</td>
+								</xsl:when>
+								
+								<xsl:when test="contains(.,'ספריית וינר') or contains(.,'Wiener Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>972-3-6407832 | wiener@tauex.tau.ac.il</td>
+								</xsl:when>							
+								
+								<xsl:when test="contains(.,'הספרייה למוסיקה') or contains(.,'Music Sub-Library')">
+									<td><xsl:value-of select="substring-before(., ':')" /></td> <td><xsl:value-of select="substring-after(., ':')" /> </td> <td>03-6408716 | muslib@post.tau.ac.il</td>
+								</xsl:when>
+
+								<xsl:otherwise>	</xsl:otherwise>
+								
+							</xsl:choose> <!-- library end  -->
+						
 						</tr>
 					</xsl:for-each>
 			</table>
