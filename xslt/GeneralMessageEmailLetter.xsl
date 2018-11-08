@@ -79,6 +79,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<xsl:value-of select="notification_data/note_to_partner"/>
 								</td>
 							</tr>
+                            <xsl:call-template name="rs_copyright">
+								<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+							</xsl:call-template>
 						</table>
 
 						<br/><br/>
@@ -87,24 +90,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
-							<tr>
-								<td>
-									<xsl:value-of select="notification_data/library/name" />
-								</td>
-							</tr>
-							<!-- testing - insert rs_dept_details details here -->
-							<tr>
-								<td>
-									<xsl:call-template name="rs_dept_details" />
-								</td>
-							</tr>
+							<!-- rs_dept_details details here from footer.xsl-->
+							<xsl:call-template name="rs_dept_details">
+								 <xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+								 <xsl:with-param name="letter_language" select="/notification_data/languages/string" />
+								 <xsl:with-param name="lib_name" select="/notification_data/library/name" /> 
+							</xsl:call-template>
+							<!-- all address lines are commented out
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if>
+							</xsl:if> 
+
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -148,10 +148,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 								</tr>
 
 							</xsl:if>
+							-->
 						</table>
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter" />
+				<xsl:call-template name="donotreply">
+					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+					<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
+				</xsl:call-template>
+
 				<!-- footer.xsl -->
 			</body>
 		</html>
