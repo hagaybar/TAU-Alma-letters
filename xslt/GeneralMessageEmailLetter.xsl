@@ -92,10 +92,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<xsl:value-of select="notification_data/library/name" />
 								</td>
 							</tr>
-							<!-- testing - insert rs lib email -->
+							<!-- testing - insert rs_dept_details details here -->
 							<tr>
 								<td>
-									<xsl:call-template name="rs_lib_email" />
+									<xsl:call-template name="rs_dept_details" />
 								</td>
 							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
