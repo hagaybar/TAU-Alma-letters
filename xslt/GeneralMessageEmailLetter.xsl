@@ -92,6 +92,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									<xsl:value-of select="notification_data/library/name" />
 								</td>
 							</tr>
+							<!-- testing - insert rs lib email -->
+							<tr>
+								<td>
+									<xsl:call-template name="rs_lib_email" />
+								</td>
+							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
@@ -151,4 +157,3 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</html>
 	</xsl:template>
 </xsl:stylesheet>
-
