@@ -465,5 +465,67 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</xsl:for-each>
 			</table>
 	</xsl:template>
+	
+	<!-- this template recieves param of library identifier and returns library phone and email seperated by "|" -->
+	
+	<xsl:template name="get_lib_contact_details">
+		<xsl:param name="lib_id_or_name" select = "/notification_data/library/org_scope/library_id" />  <!-- maybe should expand select options here with OR ?-->
+		<xsl:choose> <!-- library selection  -->				
+			<xsl:when test="contains($lib_id_or_name,'הספרייה למדעי החברה, לניהול ולחינוך') or contains($lib_id_or_name,'Social Sciences, Management and Education Library')">
+				<xsl:text>03-6409085 | SMLCirc@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'השאלה בינספרייתית - הספרייה המרכזית') or contains($lib_id_or_name,'Interlibrary Loan - Sourasky Central Library') or contains(.,'ILL - Sourasky Central Library')">
+				<xsl:text>972-3-6408746 | cenloan@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה המרכזית ע&quot;ש סוראסקי') or contains($lib_id_or_name,'Sourasky Central Library')">
+					<xsl:text>03-6408662 | cenc@tauex.tau.ac.il </xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה למשפטים ע&quot;ש דוד י. לייט') or contains($lib_id_or_name,'The David J. Light Law Library')">
+					<xsl:text>03-6408356 | lawlibdalpak@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה לארכיאולוגיה') or contains($lib_id_or_name,'Archaeology Sub-Library')">
+					<xsl:text>03-6409023 | libarc@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה לאדריכלות') or contains($lib_id_or_name,'Architecture Sub-Library')">
+					<xsl:text>03-6405535 | archlib@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה להפרעות בתקשורת, שיבא') or contains($lib_id_or_name,'Communication Disorders Library, Sheba Hospital')">
+					<xsl:text>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'﻿הספרייה למדעים מדויקים ולהנדסה') or contains($lib_id_or_name,'﻿Exact Sciences and Engineering Library')">
+					<xsl:text>03-6408145 | circulation@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'ספריית גיאוגרפיה') or contains($lib_id_or_name,'Geography Sub-Library')">
+					<xsl:text>03-6409044 | geogmaps@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה למדעי החיים ולרפואה') or contains($lib_id_or_name,'Life Sciences and Medicine Library')">
+				<xsl:text>03-6409195 | medcirc@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה לעבודה סוציאלית') or contains($lib_id_or_name,'Social Work Library')">
+					<xsl:text>03-6409183 | Estyr@tauex.tau.ac.il</xsl:text>
+			</xsl:when>
+			
+			<xsl:when test="contains($lib_id_or_name ,'ספריית וינר') or contains($lib_id_or_name,'Wiener Library')">
+					<xsl:text>972-3-6407832 | wiener@tauex.tau.ac.il</xsl:text>
+			</xsl:when>							
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה למוסיקה') or contains($lib_id_or_name,'Music Sub-Library')">
+					<xsl:text>03-6408716 | muslib@post.tau.ac.il</xsl:text>
+			</xsl:when>
+
+			<xsl:otherwise>error|missing lib_id</xsl:otherwise>
+				
+		</xsl:choose> <!-- library end  -->
+
+	</xsl:template>
 
 </xsl:stylesheet>
