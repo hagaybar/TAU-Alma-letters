@@ -85,7 +85,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:choose>
 				<xsl:when test="$lib_id = '190896720004146'">
 					<!-- law library -->
-					<xsl:text>hanal@post.tau.ac.il</xsl:text>
+					<xsl:text>hanal@tauex.tau.ac.il</xsl:text>
 				</xsl:when>
 				<xsl:when test="$lib_id = '190893010004146'">
 					<!-- social sciences library -->
