@@ -380,6 +380,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:when test="contains($lib_id_or_name ,'הספרייה לארכיאולוגיה') or contains($lib_id_or_name,'Archaeology Sub-Library')">
 				<xsl:text>03-6409023 | libarc@tauex.tau.ac.il</xsl:text>
 			</xsl:when>
+			
 			<xsl:when test="contains($lib_id_or_name ,'הספרייה לאדריכלות') or contains($lib_id_or_name,'Architecture Sub-Library')">
 				<xsl:text>03-6405535 | archlib@tauex.tau.ac.il</xsl:text>
 			</xsl:when>
@@ -387,9 +388,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<xsl:when test="contains($lib_id_or_name ,'הספרייה להפרעות בתקשורת, שיבא') or contains($lib_id_or_name,'Communication Disorders Library, Sheba Hospital')">
 				<xsl:text>03-5349817, 03-6409217 שלוחה 111 | tamarar@tauex.tau.ac.il</xsl:text>
 			</xsl:when>
-			<xsl:when test="contains($lib_id_or_name ,'הספרייה למדעים מדויקים ולהנדסה') or contains($lib_id_or_name,'﻿Exact Sciences and Engineering Library')">
+			
+			<xsl:when test="contains($lib_id_or_name ,'הספרייה למדעים מדויקים ולהנדסה') or contains($lib_id_or_name,'Exact Sciences and Engineering Library')">
 				<xsl:text>03-6408145 | circulation@tauex.tau.ac.il</xsl:text>
 			</xsl:when>
+			
 			<xsl:when test="contains($lib_id_or_name ,'ספריית גיאוגרפיה') or contains($lib_id_or_name,'Geography Sub-Library')">
 				<xsl:text>03-6409044 | geogmaps@tauex.tau.ac.il</xsl:text>
 			</xsl:when>
