@@ -158,7 +158,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</xsl:if>
 
 			  </xsl:if>
-
+			  
+			  <xsl:if test="notification_data/organization_fee_list/string">
+				<tr>
+					<xsl:call-template name="feesTable" />
+				</tr>
+				<tr>
+					<td>
+						<b>@@please_pay_message@@</b>
+						<br/><br/>
+	                </td>
+	            </tr>
+			  </xsl:if>
+			  
+			  
+<!--
 			  <xsl:if test="notification_data/organization_fee_list/string">
 	              <tr>
 	              	<td>
@@ -176,14 +190,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	                </td>
 	              </tr>
 
-	              <tr>
-	              	<td>
-						<b>@@please_pay_message@@</b>
-						<br/><br/>
-	                </td>
-	              </tr>
+
 
 			  </xsl:if>
+	-->
             </table>
 
 			<br />
