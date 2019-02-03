@@ -83,7 +83,7 @@
 														<xsl:value-of select="barcode" />
 													</td>
 													<td>
-														<xsl:value-of select="due_date" />
+														<xsl:value-of select="new_due_date_str" />
 													</td>
 												</tr>
 											</xsl:for-each>
