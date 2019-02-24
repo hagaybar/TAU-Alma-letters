@@ -118,6 +118,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 								<xsl:value-of select="notification_data/incoming_request/format"/>
 							</td>
 						</tr>
+						
+						<tr>
+							<td>
+								<b>Due Date: </b>
+								<xsl:value-of select="notification_data/incoming_request/due_date"/>
+							</td>
+						</tr>
 
 						<xsl:if  test="notification_data/incoming_request/needed_by_dummy/full_date" >
 							<tr>
@@ -222,7 +229,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						  &#160;
 
 						<!-- rs_dept_details details here from footer.xsl-->
-						<tr><td><br/></td></tr>
+						<tr><td><br/><br/></td></tr>
 						<xsl:call-template name="rs_dept_details">
 							<xsl:with-param name="lib_id" select="/notification_data/incoming_request/library_id" />
 							<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
