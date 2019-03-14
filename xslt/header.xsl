@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
 	<xsl:template name="head">
+	<!-- get letter type -->
+		<xsl:param name="letter_type" select = "/notification_data/general_data/letter_type" />
+		<!-- get library name -->
+		<xsl:param name="lib_name">
+			<xsl:choose>
+				<xsl:when test="/notification_data/library/name!=''">
+					<xsl:value-of select = "/notification_data/library/name" />
+				</xsl:when>
+				<xsl:when test="/notification_data/item/library_name!=''">
+					<xsl:value-of select="/notification_data/item/library_name" />
+				</xsl:when>	
+				<xsl:when test="/notification_data/items/physical_item_display_for_printing/library_name!=''">
+					<xsl:value-of select = "/notification_data/items/physical_item_display_for_printing/library_name" />
+				</xsl:when>
+				<xsl:when test="/notification_data/phys_item_display/owning_library_name!=''">
+					<xsl:value-of select = "/notification_data/phys_item_display/owning_library_name" />
+				</xsl:when>
+				<xsl:otherwise>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:param>
 		<table cellspacing="0" cellpadding="5" border="0">
 			<xsl:attribute name="style">
-				<xsl:call-template name="headerTableStyleCss" />
-				<!-- style.xsl -->
+				<xsl:call-template name="headerTableStyleCss" /><!-- style.xsl -->
 			</xsl:attribute>
 			<!-- LOGO INSERT -->
 			<tr>
@@ -16,7 +37,27 @@
 				<td colspan="2">
 					<div id="mailHeader">
 						<div id="logoContainer" class="alignLeft">
-							<img src="cid:logo.jpg" alt="logo"/>
+						<table>
+							<tr>
+								<td>
+									<img src="cid:logo.jpg" alt="logo" style="float: left; margin-right:10px;"/>
+								</td>
+								<td>
+									<!-- Insert library name beside the logo for letters in list -->
+									<xsl:choose>
+										<xsl:when test="contains('|GeneralMessageEmailLetter|BorrowerOverdueEmailLetter|LenderRejectEmailLetter|LenderRenewResponseEmailLetter|LendingRecallEmailLetter|LendingReqReportSlipLetter|LenderWillSupplyEmailLetter|FulBorrowingInfoLetter|LenderShipEmailLetter|FulIncomingSlipLetter|FulRenewEmailLetter|FulLostEmailLetter|QueryToPatronLetter|ResourceSharingReceiveSlipLetter|ResourceSharingReturnSlipLetter|ResourceSharingShippingSlipLetter|FulOutgoingEmailLetter|',concat('|', $letter_type, '|'))">
+											<h1 style="position: relative; margin-left:10px;"><xsl:value-of select="$lib_name" /></h1>
+										</xsl:when>
+										<xsl:otherwise>
+											<!-- do not add library name (next line used in tests):
+											<xsl:text>not included in selected letters</xsl:text>
+											-->
+										</xsl:otherwise>
+									</xsl:choose>
+								</td>
+							</tr>						
+						</table>
+
 						</div>
 					</div>
 				</td>
@@ -36,7 +77,7 @@
 			</tr>
 		</table>
 	</xsl:template>
-	
+
 	
 	<xsl:template name="headFulItemChangeDateLetter">
 		<table cellspacing="0" cellpadding="5" border="0">
@@ -149,11 +190,4 @@
 			</tr>
 		</table>
 	</xsl:template>
-	
-	
-	
-	<!-- 
-I am not able to customize the head for FulOverdueAndLostLoanNotificationLetter since user gets one message for all overdue notification types
-and I can not differentiate messages by the notification_type
--->
 </xsl:stylesheet>
