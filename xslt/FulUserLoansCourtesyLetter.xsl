@@ -61,11 +61,11 @@
 												<tr align="center" bgcolor="#f5f5f5">
 													<td colspan="3">
 														<h3><xsl:value-of select="library_name" /></h3>
-                                                                                                                 <h5>				
-                                                                                                                    <xsl:call-template name="get_lib_contact_details">
-                                                                                				    	<xsl:with-param name="lib_id_or_name" select="library_name" />
-                                                                                                                    </xsl:call-template>
-                                                                                                                 </h5>
+														<h5>
+															<xsl:call-template name="get_lib_contact_details">
+																<xsl:with-param name="lib_id_or_name" select="library_name" />
+															</xsl:call-template>
+														</h5>
 													</td>
 												</tr>
 												<tr>
@@ -78,6 +78,11 @@
 													<tr> 
 														<td>
 															<xsl:value-of select="title" />
+															<xsl:if test="item_description != ''">
+																<xsl:text>, </xsl:text>
+																<xsl:value-of select="item_description" />															
+															</xsl:if>
+
 														</td> 
 														<td>
 															<xsl:value-of select="barcode" />
