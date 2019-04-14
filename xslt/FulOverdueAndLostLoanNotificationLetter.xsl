@@ -86,7 +86,7 @@ Its based on values located in: /notification_data/loans_by_library/library_loan
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display">
 										<tr>
 											<td><xsl:value-of select="item_loan/title"/></td>
-											<td><xsl:value-of select="item_loan/description"/></td>
+											<td><xsl:value-of select="item_loan/item_description"/></td>
 											<td><xsl:value-of select="physical_item_display_for_printing/library_name"/></td>
 											<td><xsl:value-of select="item_loan/loan_date"/></td>
 											<td><xsl:value-of select="item_loan/due_date"/></td>
