@@ -87,7 +87,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
-											<td><xsl:value-of select="title"/> <xsl:value-of select="description"/></td>
+											<td><xsl:value-of select="title"/>
+												<xsl:if test="item_description != ''">
+													<xsl:text>, </xsl:text><xsl:value-of select="item_description" />
+												</xsl:if>
+											</td>
 											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
 											<td><xsl:value-of select="due_date"/></td>
@@ -144,7 +148,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 									<xsl:for-each select="item_loans/overdue_and_lost_loan_notification_display/item_loan">
 										<tr>
-											<td><xsl:value-of select="title"/> <xsl:value-of select="description"/></td>
+											<td><xsl:value-of select="title"/>
+												<xsl:if test="item_description != ''">
+													<xsl:text>, </xsl:text><xsl:value-of select="item_description" />
+												</xsl:if>
+											</td>
 											<td><xsl:value-of select="barcode"/></td>
 											<td><xsl:value-of select="fine"/></td>
 											<!-- <td><xsl:value-of select="due_date"/></td> -->
@@ -158,42 +166,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</xsl:if>
 
 			  </xsl:if>
-			  
-			  <xsl:if test="notification_data/organization_fee_list/string">
-				<tr>
+			  <tr>
+				<xsl:if test="notification_data/organization_fee_list/string">
 					<xsl:call-template name="feesTable" />
-				</tr>
-				<tr>
-					<td>
-						<b>@@please_pay_message@@</b>
-						<br/><br/>
-	                </td>
-	            </tr>
-			  </xsl:if>
-			  
-			  
-<!--
-			  <xsl:if test="notification_data/organization_fee_list/string">
-	              <tr>
-	              	<td>
-						<b>@@debt_message@@</b>
-	                </td>
-	              </tr>
-				  
-				  <xsl:call-template name="feeContactDetails" />
-
-				  <tr>
-	              	<td>
-						<b>
-						@@total@@ <xsl:value-of select="notification_data/total_fee"/>
-						</b>
-	                </td>
-	              </tr>
-
-
-
-			  </xsl:if>
-	-->
+				</xsl:if>
+			  </tr>
             </table>
 
 			<br />
