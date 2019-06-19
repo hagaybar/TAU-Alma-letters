@@ -43,7 +43,7 @@
 									<img src="cid:logo.jpg" alt="logo" style="float: left; margin-right:10px;"/>
 								</td>
 								<td>
-									<!-- Insert library name beside the logo for letters in list -->
+									<!-- insert library name beside the logo for letters in list (RS letters) -->
 									<xsl:choose>
 										<xsl:when test="contains('|GeneralMessageEmailLetter|BorrowerOverdueEmailLetter|LenderRejectEmailLetter|LenderRenewResponseEmailLetter|LendingRecallEmailLetter|LendingReqReportSlipLetter|LenderWillSupplyEmailLetter|FulBorrowingInfoLetter|LenderShipEmailLetter|FulIncomingSlipLetter|FulRenewEmailLetter|FulLostEmailLetter|QueryToPatronLetter|ResourceSharingReceiveSlipLetter|ResourceSharingReturnSlipLetter|ResourceSharingShippingSlipLetter|FulOutgoingEmailLetter|',concat('|', $letter_type, '|'))">
 											<h1 style="position: relative; margin-left:10px;"><xsl:value-of select="$lib_name" /></h1>
@@ -129,14 +129,17 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
-				<td>
-					<h1>
-						<xsl:value-of select="$letterSubject"/>
-					</h1>
-				</td>
-				<td align="right">
-					<xsl:value-of select="current_date"/>
-				</td>
+				<xsl:for-each select="notification_data/general_data">
+					<td>
+						<h1>
+							<xsl:value-of select="$letterSubject"/>
+						</h1>
+					</td>
+					<td align="right">
+						<xsl:value-of select="current_date"/>
+					</td>
+				 </xsl:for-each>
+
 			</tr>
 		</table>
 	</xsl:template>
