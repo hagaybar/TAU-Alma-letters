@@ -124,6 +124,7 @@ Its based on values located in: /notification_data/loans_by_library/library_loan
 						</tr>
 						<hr/><br/>
 					</xsl:for-each>
+                    <!-- this part is used if the libraries issue a fee for handling the notification itself.
 					<xsl:if test="notification_data/overdue_notification_fee_amount/sum !=''">
 						<tr>
 							<td>
@@ -131,11 +132,17 @@ Its based on values located in: /notification_data/loans_by_library/library_loan
 								<xsl:value-of select="notification_data/overdue_notification_fee_amount/sum"/>&#160;<xsl:value-of select="notification_data/overdue_notification_fee_amount/currency"/>&#160;<xsl:value-of select="ff"/>
 							</td>
 						</tr>
+					</xsl:if>                
+                    -->
+                    <xsl:if test="notification_data/display_list/overdue_and_lost_loan_notification_display/total_fines_amount !=''">
+						<tr>
+							<td>
+								<b>@@additional_info_1@@</b>
+							</td>
+						</tr>
 					</xsl:if>
 					<br />
 					<!--
-					<br />
-					@@additional_info_1@@
 					<br />
 					@@additional_info_2@@
 					-->
