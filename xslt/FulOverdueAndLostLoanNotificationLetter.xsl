@@ -134,7 +134,7 @@ Its based on values located in: /notification_data/loans_by_library/library_loan
 						</tr>
 					</xsl:if>                
                     -->
-                    <xsl:if test="notification_data/display_list/overdue_and_lost_loan_notification_display/total_fines_amount !=''">
+                    <xsl:if test="notification_data/display_list/overdue_and_lost_loan_notification_display/total_fines_amount !='0.00'">
 						<tr>
 							<td>
 								<b>@@additional_info_1@@</b>
