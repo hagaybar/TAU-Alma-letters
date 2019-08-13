@@ -45,8 +45,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<div class="messageBody">
 						<table cellspacing="0" cellpadding="5" border="0">
 							<tr>
-								<td>@@following_item_requested_on@@ @@can_picked_at@@.
-								
+								<td>@@following_item_requested_on@@ @@can_picked_at@@<!--This template call is used for letters sent from Wiener Library--><xsl:call-template name="additional_text">
+<xsl:with-param name="label" select="'text_01'" />
+<xsl:with-param name="lib_id" select="/notification_data/organization_unit/org_scope/library_id" />
+<xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/preferred_language" />
+</xsl:call-template>.
 									<xsl:if test="notification_data/request/work_flow_entity/expiration_date">
 										@@note_item_held_until@@ <xsl:value-of select="notification_data/request/work_flow_entity/expiration_date"/>.
 									</xsl:if>
