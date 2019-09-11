@@ -19,6 +19,26 @@
             </tr>
         </table>
     </xsl:template>
+    
+    <!-- For cases when lastFooter should appear empty-->
+    <xsl:template name="empty_lastFooter">
+        <table>
+            <xsl:attribute name="style">
+                <xsl:call-template name="footerTableStyleCss" />
+                <!-- style.xsl -->
+            </xsl:attribute>
+            <tr>
+                <xsl:for-each select="notification_data/organization_unit">
+                    <xsl:attribute name="style">
+                        <xsl:call-template name="listStyleCss" />
+                        <!-- style.xsl -->
+                    </xsl:attribute>
+                    <td align="center"><br></br></td>
+                </xsl:for-each>
+            </tr>
+        </table>
+    </xsl:template>
+    
     <xsl:template name="contactUs">
         <table align="left">
             <tr>
@@ -78,10 +98,10 @@
                     <!-- used for FulPlaceOnHoldShelfLetter sent by the Wiener Library -->
                     <xsl:when test="$label = 'text_01'">
                         <xsl:if test="$letter_language = 'he' and $lib_id='190905450004146'"> <!-- Hebrew letter -->
-                            <xsl:text> בדלפק ההשאלה בספריה המרכזית</xsl:text>
+                            <u><b><xsl:text> בדלפק ההשאלה בספריה המרכזית</xsl:text></b></u>
                         </xsl:if>
                         <xsl:if test="not($letter_language = 'he') and $lib_id='190905450004146'">
-                            <xsl:text> from the circulation desk at the Central Library</xsl:text> <!-- English letter -->
+                            <u><b><xsl:text> from the circulation desk at the Central Library</xsl:text></b></u> <!-- English letter -->
                         </xsl:if>
                     </xsl:when>
                 </xsl:choose>

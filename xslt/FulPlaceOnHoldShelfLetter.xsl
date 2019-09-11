@@ -78,13 +78,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<table cellspacing="5">
 						<tr><td>@@sincerely@@</td></tr>
 						<xsl:choose>
-							<xsl:when test="/notification_data/request/resource_sharing_request_id != ''"> <!-- RS letter-->
+                            <!-- RS letter-->
+							<xsl:when test="/notification_data/request/resource_sharing_request_id != ''"> 
 								<xsl:call-template name="rs_dept_details"> <!-- footer.xsl -->
 									 <xsl:with-param name="lib_id" select="/notification_data/organization_unit/org_scope/library_id" />
 									 <xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
 									 <xsl:with-param name="lib_name" select="/notification_data/organization_unit/name" /> 
 								</xsl:call-template>				
 							</xsl:when>
+                            <!-- a letter from Wiener Library -->
+                            <xsl:when test="/notification_data/organization_unit/org_scope/library_id = '190905450004146'">
+                                <td>@@department@@</td>
+                            </xsl:when>
 							<xsl:otherwise> <!-- not RS letter-->
 								<tr>
 									<td>@@department@@ /</td>
@@ -97,7 +102,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				</table>
 				
 				<!-- footer.xsl -->
-				<xsl:call-template name="lastFooter" />
+                
+                <!-- Show empty footer for Wiener library, and regular footer otherwise -->
+                <xsl:choose>
+                    <xsl:when test="/notification_data/organization_unit/org_scope/library_id = '190905450004146'">
+                        <xsl:call-template name="empty_lastFooter" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="lastFooter" />
+                    </xsl:otherwise>   
+                </xsl:choose>
+                
 				<xsl:call-template name="donotreply">
 					<xsl:with-param name="lib_id" select="/notification_data/organization_unit/org_scope/library_id" />
 					<xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
