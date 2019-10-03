@@ -550,12 +550,8 @@
 										<td>@@Type_3_query_line_1@@</td>
 									</tr>
 									<tr>
-										<td><b>@@Type_3_query_line_2@@</b></td>
+										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/Array_3455">@@Type_3_query_line_3@@</a></b></td>
 									</tr>
-									<!--
-									<tr>
-										<td>@@Type_3_query_line_3@@</td>
-									</tr> -->
 								</xsl:when>
 								<xsl:when test="notification_data/query_type = 'Type_4_query_name'">
 									<tr>
