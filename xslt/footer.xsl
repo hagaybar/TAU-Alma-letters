@@ -376,7 +376,7 @@
             <xsl:when test="contains($lib_id_or_name ,'השאלה בינספרייתית - הספרייה המרכזית') or contains($lib_id_or_name,'Interlibrary Loan - Sourasky Central Library') or contains(.,'ILL - Sourasky Central Library')">
                 <xsl:text>972-3-6408746 | cenloan@tauex.tau.ac.il</xsl:text>
             </xsl:when>
-            <xsl:when test="contains($lib_id_or_name ,'הספרייה המרכזית ע&quot;ש סוראסקי') or contains($lib_id_or_name,'Sourasky Central Library')">
+            <xsl:when test="contains($lib_id_or_name ,'הספרייה המרכזית') or contains($lib_id_or_name,'Sourasky Central Library')">
                 <xsl:text>03-6408662 | cenc@tauex.tau.ac.il </xsl:text>
             </xsl:when>
             <xsl:when test="contains($lib_id_or_name ,'הספרייה למשפטים ע&quot;ש דוד י. לייט') or contains($lib_id_or_name,'The David J. Light Law Library')">
