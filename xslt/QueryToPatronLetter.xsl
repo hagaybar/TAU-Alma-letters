@@ -57,6 +57,132 @@
 								</td>
 							</tr>
 						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_6_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_7_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_8_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_9_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_10_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_11_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_12_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_13_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_14_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_15_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_16_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_17_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_18_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_19_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_20_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_21_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_22_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_23_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
 						<xsl:otherwise>
 							<tr>
 								<td>
@@ -390,11 +516,13 @@
 
 						<table>
 
+							<!--
 							<tr>
 								<td>@@query_to_patron@@: </td>
-							</tr>
+							</tr>-->
 							<xsl:choose>
 								<xsl:when test="notification_data/query_type = 'Type_1_query_name'">
+									<!-- 
 									<tr>
 										<td>@@Type_1_query_line_1@@</td>
 									</tr>
@@ -403,18 +531,267 @@
 									</tr>
 									<tr>
 										<td>@@Type_1_query_line_3@@</td>
-									</tr>
+									</tr> -->
 								</xsl:when>
 								<xsl:when test="notification_data/query_type = 'Type_2_query_name'">
 									<tr>
 										<td>@@Type_2_query_line_1@@</td>
 									</tr>
+									<!--
 									<tr>
 										<td>@@Type_2_query_line_2@@</td>
 									</tr>
 									<tr>
 										<td>@@Type_2_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_3_query_name'">
+									<tr>
+										<td>@@Type_3_query_line_1@@</td>
 									</tr>
+									<tr>
+										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/Array_3455">@@Type_3_query_line_3@@</a></b></td>
+									</tr>
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_4_query_name'">
+									<tr>
+										<td>@@Type_4_query_line_1@@</td>
+									</tr>
+									<!-- 
+									<tr>
+										<td>@@Type_4_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_4_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_5_query_name'">
+									<tr>
+										<td>@@Type_5_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_5_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_5_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_6_query_name'">
+									<tr>
+										<td>@@Type_6_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_6_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_6_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_7_query_name'">
+									<tr>
+										<td>@@Type_7_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_7_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_7_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_8_query_name'">
+									<tr>
+										<td>@@Type_8_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_8_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_8_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_9_query_name'">
+									<tr>
+										<td>@@Type_9_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_9_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_9_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_10_query_name'">
+									<tr>
+										<td>@@Type_10_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_10_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_10_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_11_query_name'">
+									<tr>
+										<td>@@Type_11_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_11_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_11_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_12_query_name'">
+									<tr>
+										<td>@@Type_12_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_12_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_12_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_13_query_name'">
+									<tr>
+										<td>@@Type_13_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_13_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_13_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_14_query_name'">
+									<tr>
+										<td>@@Type_14_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_14_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_14_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_15_query_name'">
+									<tr>
+										<td>@@Type_15_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_15_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_15_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_16_query_name'">
+									<tr>
+										<td>@@Type_16_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_16_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_16_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_17_query_name'">
+									<tr>
+										<td>@@Type_17_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_17_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_17_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_18_query_name'">
+									<tr>
+										<td>@@Type_18_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_18_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_18_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_19_query_name'">
+									<tr>
+										<td>@@Type_19_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_19_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_19_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_20_query_name'">
+									<tr>
+										<td>@@Type_20_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_20_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_20_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_21_query_name'">
+									<tr>
+										<td>@@Type_21_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_21_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_21_query_line_3@@</td>
+									</tr> -->
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_22_query_name'">
+									<tr>
+										<td>@@Type_22_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_22_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_22_query_line_3@@</td>
+									</tr> -->	
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_23_query_name'">
+									<tr>
+										<td>@@Type_23_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_23_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_23_query_line_3@@</td>
+									</tr> -->	
 								</xsl:when>
 								<xsl:otherwise>
 									<tr>
@@ -435,7 +812,7 @@
 							<xsl:if test="notification_data/query_note !=''">
 								<tr>
 									<td>
-										<b> @@query_note@@: </b>
+									<!--<b> @@query_note@@: </b>-->
 										<xsl:value-of select="notification_data/query_note" />
 									</td>
 								</tr>
@@ -448,6 +825,14 @@
 							<tr>
 								<td>@@Type_1_Sincerely@@</td>
 							</tr>
+							<!-- rs_dept_details details here from footer.xsl-->
+							<xsl:call-template name="rs_dept_details">
+								 <xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+								 <xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
+								 <xsl:with-param name="lib_name" select="/notification_data/library/name" /> 
+							</xsl:call-template>
+
+							<!-- all address lines are commented out
 							<xsl:if test="notification_data/library/name !=''">
 								<tr>
 									<td>
@@ -513,10 +898,15 @@
 								</tr>
 
 							</xsl:if>
+							-->
 						</table>
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter" />
+				<xsl:call-template name="donotreply">
+					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
+					<xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
+				</xsl:call-template>
 				<!-- footer.xsl -->
 			</body>
 		</html>

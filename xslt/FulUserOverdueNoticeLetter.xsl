@@ -20,8 +20,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         </xsl:attribute>
 
         <xsl:call-template name="head" /><!-- header.xsl -->
-        <xsl:call-template name="senderReceiver" /> <!-- SenderReceiver.xsl -->
-
+        <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
 		<br />
 		<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
 
@@ -51,7 +50,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<tr>
 							<th>@@title@@</th>
 							<th>@@description@@</th>
-							<th>@@author@@</th>
+							<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
+							<!-- <th>@@author@@</th> -->
 							<th>@@due_date@@</th>
 							<th>@@library@@</th>
 						</tr>
@@ -59,9 +59,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 		<xsl:for-each select="notification_data/item_loans/item_loan">
 						<tr>
 							<td><xsl:value-of select="title"/></td>
-							<td><xsl:value-of select="description"/></td>
-							<td><xsl:value-of select="author"/></td>
-							<td><xsl:value-of select="due_date"/></td>
+							<td><xsl:value-of select="item_description"/></td>
+							<td><xsl:value-of select="barcode"/></td>
+							<!-- <td><xsl:value-of select="author"/></td> -->
+							<td><xsl:value-of select="new_due_date_str"/></td>
 							<td><xsl:value-of select="library_name"/></td>
 
 						</tr>
@@ -85,10 +86,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </div>
         </div>
 
-        <!-- footer.xsl -->
-        <xsl:call-template name="lastFooter" />
-         <xsl:call-template name="myAccount" />
-		<xsl:call-template name="contactUs" />
+		<!-- footer.xsl -->
+				<xsl:call-template name="lastFooter" />
+				<xsl:call-template name="donotreply" />
+		
+				<!--
+				<xsl:call-template name="contactUs" />
+				<xsl:call-template name="myAccount" />
+				-->
       </body>
     </html>
   </xsl:template>
