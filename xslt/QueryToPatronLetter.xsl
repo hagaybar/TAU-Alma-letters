@@ -183,6 +183,13 @@
 								</td>
 							</tr>
 						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_24_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
 						<xsl:otherwise>
 							<tr>
 								<td>
@@ -550,7 +557,10 @@
 										<td>@@Type_3_query_line_1@@</td>
 									</tr>
 									<tr>
-										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/Array_3455">@@Type_3_query_line_3@@</a></b></td>
+										<td>@@Type_3_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_3_query_line_3@@</td>
 									</tr>
 								</xsl:when>
 								<xsl:when test="notification_data/query_type = 'Type_4_query_name'">
@@ -593,10 +603,10 @@
 									<tr>
 										<td>@@Type_7_query_line_1@@</td>
 									</tr>
-									<!--
 									<tr>
 										<td>@@Type_7_query_line_2@@</td>
 									</tr>
+									<!--
 									<tr>
 										<td>@@Type_7_query_line_3@@</td>
 									</tr> -->
@@ -791,6 +801,18 @@
 									</tr>
 									<tr>
 										<td>@@Type_23_query_line_3@@</td>
+									</tr> -->	
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_24_query_name'">
+									<tr>
+										<td>@@Type_24_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_24_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_24_query_line_3@@</td>
 									</tr> -->	
 								</xsl:when>
 								<xsl:otherwise>
