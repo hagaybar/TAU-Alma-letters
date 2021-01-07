@@ -130,7 +130,7 @@
             <xsl:choose>
                 <xsl:when test="$lib_id = '190896720004146'">
                     <!-- law library -->
-                    <xsl:text>hanal@tauex.tau.ac.il</xsl:text>
+                    <xsl:text>lawill@tauex.tau.ac.il</xsl:text>
                 </xsl:when>
                 <xsl:when test="$lib_id = '190893010004146'">
                     <!-- social sciences library -->
@@ -149,7 +149,7 @@
                     <xsl:text>cenloan@tauex.tau.ac.il</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>lib_id undefined</xsl:text>
+                    <xsl:text></xsl:text> <!-- use for debugging when lib_id undefined -->
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -158,11 +158,11 @@
             <xsl:choose>
                 <xsl:when test="not(contains('|190896720004146|190902540004146|190899330004146|190893010004146|12900830000231|', concat('|', $lib_id, '|')))">
                     <!-- no valid lib_id is found -->
-                    <xsl:text>lib_id undefined</xsl:text>
+                    <xsl:text></xsl:text> <!-- use for debugging when lib_id undefined -->
                 </xsl:when>
                 <xsl:when test="not(contains('|he|en|', concat('|', $letter_language, '|')))">
                     <!-- no valid letter_language is found -->
-                    <xsl:text>letter_language undefined</xsl:text>
+                    <xsl:text></xsl:text> <!-- use for debugging when letter_language undefined -->
                 </xsl:when>
                 <xsl:when test="contains('|190896720004146|190902540004146|190899330004146|', concat('|', $lib_id, '|'))">
                     <!-- law library|exact sciences library|life sciences library -->
@@ -206,7 +206,7 @@
                     <xsl:choose>
                         <xsl:when test="$lib_id = '190896720004146'">
                             <!-- law library -->
-                            <xsl:text>טלפון: 03-6406177</xsl:text>
+                            <xsl:text>טלפון: 03-6406172 ; 03-6406232</xsl:text>
                         </xsl:when>
                         <xsl:when test="$lib_id = '190893010004146'">
                             <!-- social sciences library -->
@@ -231,7 +231,7 @@
                     <xsl:choose>
                         <xsl:when test="$lib_id = '190896720004146'">
                             <!-- law library -->
-                            <xsl:text>Phone: 03-6406177</xsl:text>
+                            <xsl:text>Phone: 03-6406172 ; 03-6406232</xsl:text>
                         </xsl:when>
                         <xsl:when test="$lib_id = '190893010004146'">
                             <!-- social sciences library -->
