@@ -228,22 +228,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						  </tr>
 						  &#160;
 
-						<!-- rs_dept_details details here from footer.xsl-->
+						<!-- rs_details from footer.xsl-->
 						<tr><td><br/><br/></td></tr>
-						<xsl:call-template name="rs_dept_details">
-							<xsl:with-param name="lib_id" select="/notification_data/incoming_request/library_id" />
-							<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
-							<xsl:with-param name="lib_name" select="/notification_data/item/owning_library_details/name" /> 
-						</xsl:call-template>
-
-
+                                                  <xsl:call-template name="rs_details" />
 					</table>
 				</div>
 			</div>
 
-
-
-	<!-- rs_dept_details from footer.xsl-->
 	<xsl:call-template name="lastFooter" /> <!-- footer.xsl -->
 </body>
 </html>
