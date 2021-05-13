@@ -69,23 +69,23 @@
 		</table>
 	</xsl:template>
 	<!-- The following is a general template for adding text to letters
-    it has various built-in pramaters (library id, letter language, etc) and more can be added if needed.
-    It is important to notice the 'label' parameter, **mandatory** - in order to add a text to a letter.
-    
-    More details: 
-    =============
-    When we call this template, we do the following: 
-    <xsl:call-template name="additional_text">
-        <xsl:with-param name="label" select="label_name" />
-        [some more optional parameters come here]
-	</xsl:call-template>
-    
-    When calling the template, the value given to "label" will be used to determine what type of text is added to the letter.
-    For example: 'text_01' label is used for FulPlaceOnHoldShelfLetter when it is sent by the Wiener Library - to notify the users that books would be waiting for them at another library
-    Additional label types can be added in the same way. Recommended naming convention: 'text_x' where x is a number not used by previous labels (each label must have unique name)
-    
-    It would be best to utilize only this template for adding text to letters (when the built-in alma letter labels are not enough).
-
+         it has various built-in pramaters (library id, letter language, etc) and more can be added if needed.
+         It is important to notice the 'label' parameter, **mandatory** - in order to add a text to a letter.
+         
+         More details: 
+         =============
+         When we call this template, we do the following: 
+         <xsl:call-template name="additional_text">
+         <xsl:with-param name="label" select="label_name" />
+         [some more optional parameters come here]
+         </xsl:call-template>
+         
+         When calling the template, the value given to "label" will be used to determine what type of text is added to the letter.
+         For example: 'text_01' label is used for FulPlaceOnHoldShelfLetter when it is sent by the Wiener Library - to notify the users that books would be waiting for them at another library
+         Additional label types can be added in the same way. Recommended naming convention: 'text_x' where x is a number not used by previous labels (each label must have unique name)
+         
+         It would be best to utilize only this template for adding text to letters (when the built-in alma letter labels are not enough).
+         
     -->
 	<xsl:template name="additional_text">
 		<xsl:param name="label"/>
@@ -115,6 +115,24 @@
 							<!-- English letter -->
 						</xsl:if>
 					</xsl:when>
+					<xsl:when test="$label = 'text_02'">
+						<xsl:if test="$letter_language = 'he'">
+							<!-- Hebrew letter -->
+							<u>
+								<b>
+									<xsl:text>קראו ספרים, עשו חיים</xsl:text>
+								</b>
+							</u>
+						</xsl:if>
+						<xsl:if test="not($letter_language = 'he')">
+							<u>
+								<b>
+									<xsl:text>Read Books. Live Better</xsl:text>
+								</b>
+							</u>
+							<!-- English letter -->
+						</xsl:if>
+					</xsl:when>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise/>
@@ -131,33 +149,13 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<!-- this template add the rs Department contact details when called, 3 params should be specified: lib_id, letter_language, lib_name -->
-	<xsl:template name="rs_dept_details">
-		<xsl:param name="lib_id" select="/notification_data/library/org_scope/library_id"/>
-		<xsl:param name="letter_language" select="/notification_data/languages/string"/>
-		<xsl:param name="lib_name" select="notification_data/library/name"/>
-		<!-- 'rs_email' contains the library's email address, its value is determined according to the value of 'lib_id'. -->
-		<xsl:variable name="rs_email">
+	<!-- *********** RS CONTACT DETAILS - REVISED TEMPLATE *********** -->
+	<xsl:template name="rs_details_display">
+		<xsl:param name="library"/>
+		<xsl:variable name="language">
 			<xsl:choose>
-				<xsl:when test="$lib_id = '190896720004146'">
-					<!-- law library -->
-					<xsl:text>lawill@tauex.tau.ac.il</xsl:text>
-				</xsl:when>
-				<xsl:when test="$lib_id = '190893010004146'">
-					<!-- social sciences library -->
-					<xsl:text>SMLILL@tauex.tau.ac.il</xsl:text>
-				</xsl:when>
-				<xsl:when test="$lib_id = '190902540004146'">
-					<!-- exact sciences library -->
-					<xsl:text>tusill@tauex.tau.ac.il</xsl:text>
-				</xsl:when>
-				<xsl:when test="$lib_id = '190899330004146'">
-					<!-- life sciences library -->
-					<xsl:text>illmail@tauex.tau.ac.il</xsl:text>
-				</xsl:when>
-				<xsl:when test="$lib_id = '12900830000231'">
-					<!-- Central Library (resource sharing) -->
-					<xsl:text>cenloan@tauex.tau.ac.il</xsl:text>
+				<xsl:when test="/notification_data/languages/string != ''">
+					<xsl:value-of select="/notification_data/languages/string"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:text/>
@@ -165,43 +163,63 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<!-- 'rs_desc' contains the library's RS description, 
-		     its value is determined according to the values of 'lib_id' and letter_language. 
-		-->
+		<xsl:variable name="email">
+			<xsl:choose>
+				<xsl:when test="$library= 'AL1'">
+					<!-- law library -->
+					<xsl:text>lawill@tauex.tau.ac.il</xsl:text>
+				</xsl:when>
+				<xsl:when test="$library= 'AH1'">
+					<!-- social sciences library -->
+					<xsl:text>SMLILL@tauex.tau.ac.il</xsl:text>
+				</xsl:when>
+				<xsl:when test="$library= 'AS1'">
+					<!-- exact sciences library -->
+					<xsl:text>tusill@tauex.tau.ac.il</xsl:text>
+				</xsl:when>
+				<xsl:when test="$library= 'AM1'">
+					<!-- life sciences library -->
+					<xsl:text>illmail@tauex.tau.ac.il</xsl:text>
+				</xsl:when>
+				<xsl:when test="$library= 'AC1'">
+					<!-- Central Library (resource sharing) -->
+					<xsl:text>cenloan@tauex.tau.ac.il</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>no library found</xsl:text>
+					<!-- use for debugging when lib_id undefined -->
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="rs_desc">
 			<xsl:choose>
-				<xsl:when test="not(contains('|190896720004146|190902540004146|190899330004146|190893010004146|12900830000231|', concat('|', $lib_id, '|')))">
-					<!-- no valid lib_id is found -->
-					<xsl:text/>
-					<!-- use for debugging when lib_id undefined -->
-				</xsl:when>
-				<xsl:when test="not(contains('|he|en|', concat('|', $letter_language, '|')))">
+				<xsl:when test="not(contains('|he|en|', concat('|', $language, '|')))">
 					<!-- no valid letter_language is found -->
 					<xsl:text/>
 					<!-- use for debugging when letter_language undefined -->
 				</xsl:when>
-				<xsl:when test="contains('|190896720004146|190902540004146|190899330004146|', concat('|', $lib_id, '|'))">
+				<xsl:when test="($library= 'AL1') or ($library= 'AS1') or ($library= 'AM1')">
 					<!-- law library|exact sciences library|life sciences library -->
-					<xsl:if test="$letter_language='he'">
+					<xsl:if test="$language='he'">
 						<xsl:text>מדור השאלה בינספרייתית</xsl:text>
 					</xsl:if>
-					<xsl:if test="$letter_language='en'">
+					<xsl:if test="$language='en'">
 						<xsl:text>Interlibrary Loan Department</xsl:text>
 					</xsl:if>
 				</xsl:when>
-				<xsl:when test="$lib_id = '190893010004146'">
+				<xsl:when test="$library= 'AH1'">
 					<!-- social sciences library -->
-					<xsl:if test="$letter_language='he'">
+					<xsl:if test="$language='he'">
 						<xsl:text>שירותי השאלה בינספרייתית ואספקת פרסומים</xsl:text>
 					</xsl:if>
-					<xsl:if test="$letter_language='en'">
+					<xsl:if test="$language='en'">
 						<xsl:text>Interlibrary Loan and Document Delivery Services</xsl:text>
 					</xsl:if>
 				</xsl:when>
-				<xsl:when test="$lib_id = '12900830000231'">
+				<xsl:when test="$library= 'AC1'">
 					<!-- Central Library (resource sharing) -->
 					<xsl:choose>
-						<xsl:when test="$letter_language = 'he'">
+						<xsl:when test="$language = 'he'">
 							<xsl:text>השאלה בינספרייתית</xsl:text>
 						</xsl:when>
 						<xsl:otherwise>
@@ -214,56 +232,51 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<!-- 'rs_phone' contains the library's RS phone numbers, 
-			 its value is determined according to the values of 'lib_id' and letter_language. 
-		-->
 		<xsl:variable name="rs_phone">
 			<xsl:choose>
-				<xsl:when test="$letter_language='he'">
-					<!-- hebrew -->
+				<xsl:when test="$language='he'">
 					<xsl:choose>
-						<xsl:when test="$lib_id = '190896720004146'">
+						<xsl:when test="$library= 'AL1'">
 							<!-- law library -->
 							<xsl:text>טלפון: 03-6406172 ; 03-6406232</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190893010004146'">
+						<xsl:when test="$library= 'AH1'">
 							<!-- social sciences library -->
-							<xsl:text>טלפון: 03-6407066 ; 03-6405504 | פקס: 03-6407840</xsl:text>
+							<xsl:text>טלפון: 03-6407066 ; 03-6405501 | פקס: 03-6407840</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190902540004146'">
+						<xsl:when test="$library= 'AS1'">
 							<!-- exact sciences library -->
 							<xsl:text>טלפון: 03-6409269</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190899330004146'">
+						<xsl:when test="$library= 'AM1'">
 							<!-- life sciences library -->
 							<xsl:text>טלפון: 03-6407966; 03-6409752</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '12900830000231'">
+						<xsl:when test="$library= 'AC1'">
 							<!-- Central Library (resource sharing) -->
 							<xsl:text>טלפון: 972-3-6408746</xsl:text>
 						</xsl:when>
 					</xsl:choose>
 				</xsl:when>
-				<xsl:when test="$letter_language='en'">
-					<!-- english -->
+				<xsl:when test="$language='en'">
 					<xsl:choose>
-						<xsl:when test="$lib_id = '190896720004146'">
+						<xsl:when test="$library= 'AL1'">
 							<!-- law library -->
 							<xsl:text>Phone: 03-6406172 ; 03-6406232</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190893010004146'">
+						<xsl:when test="$library= 'AH1'">
 							<!-- social sciences library -->
-							<xsl:text>Phone: 03-6407066 ; 03-6405504 | Fax: 03-6407840</xsl:text>
+							<xsl:text>Phone: 03-6407066 ; 03-6405501 | Fax: 03-6407840</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190902540004146'">
+						<xsl:when test="$library= 'AS1'">
 							<!-- exact sciences library -->
 							<xsl:text>Phone: 03-6409269</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '190899330004146'">
+						<xsl:when test="$library= 'AM1'">
 							<!-- life sciences library -->
 							<xsl:text>Phone: 03-6407966; 03-6409752</xsl:text>
 						</xsl:when>
-						<xsl:when test="$lib_id = '12900830000231'">
+						<xsl:when test="$library= 'AC1'">
 							<!-- Central Library (resource sharing) -->
 							<xsl:text>Phone: 972-3-6408746</xsl:text>
 						</xsl:when>
@@ -272,58 +285,154 @@
 			</xsl:choose>
 		</xsl:variable>
 		<!-- display part -->
-		<tr>
-			<td>
-				<b>
-					<xsl:value-of select="$rs_desc"/>
-				</b>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<xsl:choose>
-					<xsl:when test="$lib_id = '12900830000231'">
-						<!-- Central Library (resource sharing) -->
-						<xsl:choose>
-							<xsl:when test="$letter_language = 'he'">
-								<b>הספרייה המרכזית ע"ש סוראסקי</b>
-							</xsl:when>
-							<xsl:otherwise>
-								<b>Sourasky Central Library</b>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:otherwise>
-						<!-- All other libraries -->
-						<b>
-							<xsl:value-of select="$lib_name"/>
-						</b>
-					</xsl:otherwise>
-				</xsl:choose>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<b>
-					<xsl:value-of select="$rs_phone"/> |
+		<table>
+			<tr>
+				<td>
+					<b>
+						<xsl:value-of select="$rs_desc"/>
+					</b>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<xsl:choose>
-						<xsl:when test="$letter_language = 'he'">
-							דוא"ל:
+						<xsl:when test="$library = 'AC1'">
+							<!-- Central Library (resource sharing) -->
+							<xsl:choose>
+								<xsl:when test="$language = 'he'">
+									<b>הספרייה המרכזית ע"ש סוראסקי</b>
+								</xsl:when>
+								<xsl:otherwise>
+									<b>Sourasky Central Library</b>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:when>
+						<xsl:when test="contains('|AL1|AS1|AH1|AM1|', concat('|', $library, '|'))">
+							<!-- All other libraries -->
+							<xsl:choose>
+								<xsl:when test="$language = 'he'">
+									<xsl:choose>
+										<xsl:when test="$library = 'AL1'">
+											<b>הספרייה למשפטים ע&quot;ש דוד י. לייט</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AH1'">
+											<b>הספרייה למדעי החברה, לניהול ולחינוך</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AS1'">
+											<b>הספרייה למדעים מדויקים ולהנדסה</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AM1'">
+											<b>הספרייה למדעי החיים ולרפואה</b>
+										</xsl:when>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:when test="$language = 'en'">
+									<xsl:choose>
+										<xsl:when test="$library = 'AL1'">
+											<b>The David J. Light Law Library</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AH1'">
+											<b>Social Sciences, Management and Education Library</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AS1'">
+											<b>Exact Sciences and Engineering Library</b>
+										</xsl:when>
+										<xsl:when test="$library = 'AM1'">
+											<b>Life Sciences and Medicine Library</b>
+										</xsl:when>
+									</xsl:choose>
+								</xsl:when>
+							</xsl:choose>
 						</xsl:when>
 						<xsl:otherwise>
-							Email:
+							<!--  could not find lib_id or lib_code -->
 						</xsl:otherwise>
 					</xsl:choose>
-					<a href="mailto:{$rs_email}">
-						<xsl:value-of select="$rs_email"/>
-					</a>
-				</b>
-			</td>
-		</tr>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>
+						<xsl:value-of select="$rs_phone"/> |
+						<xsl:choose>
+							<xsl:when test="$language = 'he'">
+								דוא"ל:
+							</xsl:when>
+							<xsl:otherwise>
+								Email:
+							</xsl:otherwise>
+						</xsl:choose>
+						<a href="mailto:{$email}">
+							<xsl:value-of select="$email"/>
+						</a>
+					</b>
+				</td>
+			</tr>
+		</table>
+		<br/>
 	</xsl:template>
-	<!-- the following template currently working for the GeneralMessageEmailLetter, not tested on other templates yet -->
+	<xsl:template name="rs_details">
+		<xsl:variable name="lib_id">
+			<xsl:choose>
+				<xsl:when test="/notification_data/library/org_scope/library_id != ''">
+					<!-- relevent for letters:..... -->
+					<xsl:value-of select="/notification_data/library/org_scope/library_id"/>
+				</xsl:when>
+				<xsl:when test="/notification_data/incoming_request/library_id != ''">
+					<!-- relevent for letters:..... -->
+					<xsl:value-of select="/notification_data/incoming_request/library_id"/>
+				</xsl:when>
+				<xsl:when test="/notification_data/receivers/receiver/user/library_code != ''">
+					<xsl:value-of select="/notification_data/receivers/receiver/user/library_code"/>
+				</xsl:when>
+				<xsl:when test="/notification_data/organization_unit/org_scope/library_id != ''">
+					<xsl:value-of select="/notification_data/organization_unit/org_scope/library_id"/>
+				</xsl:when>
+				<!-- relevent for letters: FulDigitizationDocumentDeliveryNotificationLetter -->
+				<xsl:when test="/notification_data/receivers/receiver/user/library_code_original_value != ''">
+					<xsl:value-of select="/notification_data/receivers/receiver/user/library_code_original_value"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text/>
+					<!-- use for debugging when lib_id undefined -->
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:if test="($lib_id = '190893010004146') or (contains($lib_id, 'AH1'))">
+			<xsl:call-template name="rs_details_display">
+				<xsl:with-param name="library" select="'AH1'"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="($lib_id = '190896720004146') or (contains($lib_id, 'AL1'))">
+			<xsl:call-template name="rs_details_display">
+				<xsl:with-param name="library" select="'AL1'"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="($lib_id = '190902540004146') or (contains($lib_id, 'AS1'))">
+			<xsl:call-template name="rs_details_display">
+				<xsl:with-param name="library" select="'AS1'"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="($lib_id = '190899330004146') or (contains($lib_id, 'AM1'))">
+			<xsl:call-template name="rs_details_display">
+				<xsl:with-param name="library" select="'AM1'"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="($lib_id = '12900830000231') or (contains($lib_id, 'RES_SHARE'))">
+			<xsl:call-template name="rs_details_display">
+				<xsl:with-param name="library" select="'AC1'"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+	<!-- the following template designed to provide copyright message specifically for the Central Library RS
+         it was tested and applied only for the GeneralMessageEmailLetter, 
+         not tested on other letters yet
+    -->
 	<xsl:template name="rs_copyright">
 		<xsl:param name="lib_id" select="/notification_data/library/org_scope/library_id"/>
+		<xsl:param name="lib_code" select="/notification_data/receivers/receiver/user/library_code_original_value"/>
+		<!-- 'lib_code' identifies the rs library that handles requests in FulDigitizationDocumentDeliveryNotificationLetter 
+             the possible values are: RES_SHARE ; AL1 ; AH1 ; AS1 ; AM1 -->
 		<xsl:choose>
 			<xsl:when test="/notification_data/languages/string != 'he'">
 				<tr>
@@ -331,7 +440,7 @@
 						<b>Please note: Articles/Chapters may be used for research and study purposes only.</b>
 					</td>
 				</tr>
-				<xsl:if test="$lib_id = '12900830000231'">
+				<xsl:if test="($lib_id = '12900830000231') or ($lib_code = 'RES_SHARE')">
 					<!-- RS - cen. lib. -->
 					<tr>
 						<td>
@@ -346,7 +455,7 @@
 						<b>לתשומת לבך: השימוש בפריט זה מותר לצורכי מחקר ולימוד בלבד.</b>
 					</td>
 				</tr>
-				<xsl:if test="$lib_id = '12900830000231'">
+				<xsl:if test="($lib_id = '12900830000231') or ($lib_code = 'RES_SHARE')">
 					<!-- RS - cen. lib. -->
 					<tr>
 						<td>
@@ -441,9 +550,8 @@
 		</xsl:choose>
 		<!-- library end  -->
 	</xsl:template>
-	<!-- feeTable template adds fees table with library's contact details (phone number and email) 
-		 which appears at the end of the FulUserBorrowingActivityLetter
-	-->
+	<!-- feeTable template adds fees table with library's contact details (phone number and email) which appears at the end of the FulUserBorrowingActivityLetter
+    -->
 	<xsl:template name="feesTable">
 		<xsl:param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language"/>
 		<table cellpadding="5" class="listing">
