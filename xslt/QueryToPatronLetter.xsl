@@ -847,13 +847,8 @@
 							<tr>
 								<td>@@Type_1_Sincerely@@</td>
 							</tr>
-							<!-- rs_dept_details details here from footer.xsl-->
-							<xsl:call-template name="rs_dept_details">
-								 <xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-								 <xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
-								 <xsl:with-param name="lib_name" select="/notification_data/library/name" /> 
-							</xsl:call-template>
-
+							<!-- rs_details from footer.xsl-->
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
 							<xsl:if test="notification_data/library/name !=''">
 								<tr>
