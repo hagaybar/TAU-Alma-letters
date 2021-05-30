@@ -557,10 +557,7 @@
 										<td>@@Type_3_query_line_1@@</td>
 									</tr>
 									<tr>
-										<td>@@Type_3_query_line_2@@</td>
-									</tr>
-									<tr>
-										<td>@@Type_3_query_line_3@@</td>
+										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/interlibrary-loan/">@@Type_3_query_line_3@@</a></b></td>
 									</tr>
 								</xsl:when>
 								<xsl:when test="notification_data/query_type = 'Type_4_query_name'">
