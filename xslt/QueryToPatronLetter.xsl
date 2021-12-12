@@ -190,6 +190,13 @@
 								</td>
 							</tr>
 						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_25_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
 						<xsl:otherwise>
 							<tr>
 								<td>
@@ -810,6 +817,18 @@
 									</tr>
 									<tr>
 										<td>@@Type_24_query_line_3@@</td>
+									</tr> -->	
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_25_query_name'">
+									<tr>
+										<td>@@Type_25_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_25_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_25_query_line_3@@</td>
 									</tr> -->	
 								</xsl:when>
 								<xsl:otherwise>
