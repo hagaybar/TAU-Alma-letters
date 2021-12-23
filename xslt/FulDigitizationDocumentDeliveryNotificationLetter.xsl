@@ -36,14 +36,32 @@
 								<td>@@title@@: <xsl:value-of select="notification_data/phys_item_display/title"/>
 								</td>
 							</tr>
-							<!-- To download the resource for saml users-->
-							<tr>
-								<td>@@to_see_the_resource@@<a>
-										<xsl:attribute name="href">
-											<xsl:value-of select="notification_data/download_url_saml"/>
-										</xsl:attribute>@@click_here@@</a>
-								</td>
-							</tr>
+							
+				<tr>
+					<td>
+					<xsl:choose>
+						<!-- internal authentication for the user groups 'Medical libraries for RS' or 'Hospital project libraries for RS' or 'Research institutes for RS' -->
+						<xsl:when test="notification_data/user_for_printing/user_group='89' or notification_data/user_for_printing/user_group='87' or notification_data/user_for_printing/user_group='90'">
+								@@to_see_the_resource@@ @@for_local_users@@<a><xsl:attribute name="href"><xsl:value-of select="notification_data/download_url_local" /></xsl:attribute>@@click_here@@</a>
+								<xsl:choose>
+									<xsl:when test="notification_data/receivers/receiver/preferred_language = 'he'">
+										<tr><td> <xsl:text>שם משתמש: </xsl:text> <xsl:value-of select="notification_data/receivers/receiver/user/user_name"/></td></tr>
+										<tr><td> <xsl:text>סיסמא: 12345679</xsl:text></td></tr>
+									</xsl:when>
+									<xsl:otherwise>
+										<tr><td> <xsl:text>User name: </xsl:text> <xsl:value-of select="notification_data/receivers/receiver/user/user_name"/></td></tr>
+										<tr><td> <xsl:text>Password: 12345679</xsl:text></td></tr>
+									</xsl:otherwise>
+								</xsl:choose>
+						</xsl:when>
+						<!-- SAML authentication -->
+						<xsl:otherwise>
+					            @@to_see_the_resource@@ @@for_saml_users@@<a><xsl:attribute name="href"><xsl:value-of select="notification_data/download_url_saml" /></xsl:attribute>@@click_here@@</a>
+						</xsl:otherwise>
+					</xsl:choose>
+					</td>
+				</tr>			
+							
 							<!-- <tr>
 					<td>@@for_local_users@@<a><xsl:attribute name="href"><xsl:value-of select="notification_data/download_url_local" /></xsl:attribute>@@click_here@@</a></td>
 				</tr> 
@@ -54,7 +72,7 @@
 					<td>@@for_cas_users@@<a><xsl:attribute name="href"><xsl:value-of select="notification_data/download_url_cas" /></xsl:attribute>@@click_here@@</a></td>
 				</tr> -->
 							<tr>
-								<td>@@max_num_of_views@@ <xsl:value-of select="notification_data/request/document_delivery_max_num_of_views"/>.</td>
+								<td>@@max_num_of_views@@ <xsl:value-of select="notification_data/request/document_delivery_max_num_of_views"/></td>
 							</tr>
 							<tr>
 								<td>@@sincerely@@<br/>
