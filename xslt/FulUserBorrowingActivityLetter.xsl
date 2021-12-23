@@ -79,8 +79,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									</tr>
 									<tr>
 										<th>@@title@@</th>
-										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
-										<th>@@fine@@</th>
+										<!-- <th><xsl:call-template name="barcode" /></th> --><!-- custom template in footer.xsl -->
+										<!-- <th>@@fine@@</th> -->
 										<th>@@due_date@@</th>
 
 									</tr>
@@ -92,8 +92,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 													<xsl:text>, </xsl:text><xsl:value-of select="item_description" />
 												</xsl:if>
 											</td>
-											<td><xsl:value-of select="barcode"/></td>
-											<td><xsl:value-of select="fine"/></td>
+											<!-- <td><xsl:value-of select="barcode"/></td> -->
+											<!-- <td><xsl:value-of select="fine"/></td> -->
 											<td><xsl:value-of select="due_date"/></td>
 										</tr>
 									</xsl:for-each>
@@ -141,8 +141,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 									</tr>
 									<tr>
 										<th>@@title@@</th>
-										<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
-										<th>@@fine@@</th>
+										<!-- <th><xsl:call-template name="barcode" /></th> --> <!-- custom template in footer.xsl -->
+										<!-- <th>@@fine@@</th> -->
 										<!-- <th>@@due_date@@</th> -->
 									</tr>
 
@@ -153,8 +153,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 													<xsl:text>, </xsl:text><xsl:value-of select="item_description" />
 												</xsl:if>
 											</td>
-											<td><xsl:value-of select="barcode"/></td>
-											<td><xsl:value-of select="fine"/></td>
+											<!-- <td><xsl:value-of select="barcode"/></td> -->
+											<!-- <td><xsl:value-of select="fine"/></td> -->
 											<!-- <td><xsl:value-of select="due_date"/></td> -->
 										</tr>
 									</xsl:for-each>
@@ -174,7 +174,20 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             </table>
 
 			<br />
+			<h3>
+			<xsl:call-template name="additional_text">
+				<xsl:with-param name="label" select="'text_03'" />
+				<xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/preferred_language" />
+			</xsl:call-template>
+			<a href="https://tau-primo.hosted.exlibrisgroup.com/primo-explore/account?vid=TAU&amp;section=overview&amp;lang=en_US">
+				<xsl:call-template name="additional_text">
+					<xsl:with-param name="label" select="'text_04'" />
+					<xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/preferred_language" />
+				</xsl:call-template>
+			</a>
+			</h3>
 
+			
 			<table>
 				<tr><td>@@sincerely@@</td></tr>
 				<tr><td>@@department@@</td></tr>
