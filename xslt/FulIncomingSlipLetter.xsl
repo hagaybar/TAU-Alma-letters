@@ -57,7 +57,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<tr>
 							<td>
 								<b>@@supplied_to@@: </b>
-								<xsl:value-of select="notification_data/partner_name"/>
+								<xsl:choose>
+									<xsl:when test="string-length(notification_data/incoming_request/pickup_partner_name) &gt; 0">
+										<xsl:value-of select="notification_data/incoming_request/pickup_partner_name"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="notification_data/partner_name"/>
+									</xsl:otherwise>
+								</xsl:choose>
 							</td>
 						</tr>
 
@@ -70,11 +77,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			              </tr>
 
 
-						<!--
+
 			          <tr>
 							  <td><b>@@my_id@@: </b><img src="externalId.png" alt="externalId" /></td>
 				      </tr>
-						-->
+
 						<tr>
 							<td>
 								<b>@@format@@: </b>
@@ -127,26 +134,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 									</tr>
 								</xsl:if>
-<!-- 
-The following for-each loop goes through all the items in the XML.
-The problem is that the librarian might recieve a long list of titles that is not needed.
-Still, there's an option that two items has different locations - and if you show only one of them the user lack important info.
--->
+
 						<xsl:for-each select="notification_data/items/physical_item_display_for_printing">
 							<br></br>
-<!-- 
+
 							<tr>
 							  <td><b>@@item_barcode@@: </b><img src="cid:{concat(concat('Barcode',position()),'.png')}" alt="{concat('Barcode',position())}" /></td>
 							</tr>
-							
-							
-							
-							<tr>
-								<td><xsl:value-of select="/notification_data/metadata/title"/></td>
-							</tr>
-							
-							
--->
+
 							<tr>
 								<td><xsl:value-of select="title"/></td>
 							</tr>
