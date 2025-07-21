@@ -183,6 +183,20 @@
 								</td>
 							</tr>
 						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_24_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
+						<xsl:when test="notification_data/query_type = 'Type_25_query_name'">
+							<tr>
+								<td>
+									<h3>@@Type_5_header@@</h3>
+								</td>
+							</tr>
+						</xsl:when>
 						<xsl:otherwise>
 							<tr>
 								<td>
@@ -550,7 +564,7 @@
 										<td>@@Type_3_query_line_1@@</td>
 									</tr>
 									<tr>
-										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/Array_3455">@@Type_3_query_line_3@@</a></b></td>
+										<td><b>@@Type_3_query_line_2@@<a href="https://cenlib.tau.ac.il/interlibrary-loan/">@@Type_3_query_line_3@@</a></b></td>
 									</tr>
 								</xsl:when>
 								<xsl:when test="notification_data/query_type = 'Type_4_query_name'">
@@ -593,10 +607,10 @@
 									<tr>
 										<td>@@Type_7_query_line_1@@</td>
 									</tr>
-									<!--
 									<tr>
 										<td>@@Type_7_query_line_2@@</td>
 									</tr>
+									<!--
 									<tr>
 										<td>@@Type_7_query_line_3@@</td>
 									</tr> -->
@@ -793,6 +807,30 @@
 										<td>@@Type_23_query_line_3@@</td>
 									</tr> -->	
 								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_24_query_name'">
+									<tr>
+										<td>@@Type_24_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_24_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_24_query_line_3@@</td>
+									</tr> -->	
+								</xsl:when>
+								<xsl:when test="notification_data/query_type = 'Type_25_query_name'">
+									<tr>
+										<td>@@Type_25_query_line_1@@</td>
+									</tr>
+									<!--
+									<tr>
+										<td>@@Type_25_query_line_2@@</td>
+									</tr>
+									<tr>
+										<td>@@Type_25_query_line_3@@</td>
+									</tr> -->	
+								</xsl:when>
 								<xsl:otherwise>
 									<tr>
 										<td>@@Type_1_query_line_1@@</td>
@@ -825,13 +863,8 @@
 							<tr>
 								<td>@@Type_1_Sincerely@@</td>
 							</tr>
-							<!-- rs_dept_details details here from footer.xsl-->
-							<xsl:call-template name="rs_dept_details">
-								 <xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-								 <xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
-								 <xsl:with-param name="lib_name" select="/notification_data/library/name" /> 
-							</xsl:call-template>
-
+							<!-- rs_details from footer.xsl-->
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
 							<xsl:if test="notification_data/library/name !=''">
 								<tr>

@@ -386,8 +386,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
-							<!-- rs_dept_details details here from footer.xsl-->
-							<xsl:call-template name="rs_dept_details" />
+							<!-- rs_details from footer.xsl-->
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
 							<tr>
 								<td>

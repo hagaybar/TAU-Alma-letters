@@ -20,87 +20,93 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<xsl:call-template name="head" />
 				<!-- header.xsl -->
 
-			    <table cellspacing="0" cellpadding="5" border="0">
-					<tr>
-						<td>
-
-							<h3>@@header@@</h3>
-
-						</td>
-					</tr>
-				</table>
-
 				<div class="messageArea">
 					<div class="messageBody">
 						<table cellspacing="0" cellpadding="5" border="0">
 
 							<tr>
 								<td>
-									<b>@@request@@</b>
+									<b>@@overdue_message@@</b>
+									<b> @@orignal_due_date@@: <xsl:value-of select="notification_data/request/due_date"/>.</b>
+									<br/>
+									<b>@@return_message@@</b>
 								</td>
+
 							</tr>
 
 						</table>
-
-                        <br/>
 						<table cellspacing="0" cellpadding="5" border="0">
+
 							<xsl:attribute name="style">
-								<xsl:call-template name="listStyleCss"/>
-								<!-- style.xsl -->
+								<xsl:call-template name="listStyleCss" />
 							</xsl:attribute>
+
 							<tr>
 								<td>
-									<b> @@requestId@@: </b>
-									<xsl:value-of select="notification_data/request/external_request_id"/>
+									<b>@@request_info@@:</b>
 								</td>
 							</tr>
+
 							<tr>
 								<td>
-									<b> @@title@@: </b>
-									<xsl:value-of select="notification_data/request/display/title"/>
+									<b>@@request_id@@: </b>
+									<xsl:value-of select="notification_data/request/external_request_id" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<b>@@title@@: </b>
+									<xsl:value-of select="notification_data/request/display/title" />
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<b> @@author@@: </b>
-									<xsl:value-of select="notification_data/request/display/author"/>
+									<xsl:value-of select="notification_data/request/display/author" />
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<b> @@requestDate@@: </b>
-									<xsl:value-of select="notification_data/request/create_date_str"/>
+									<b> @@request_date@@: </b>
+									<xsl:value-of select="notification_data/request/create_date" />
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<br/>
-									<b> @@note@@: </b>
-									<xsl:value-of select="notification_data/note_to_partner"/>
+									<b> @@needed_by_date@@: </b>
+									<xsl:value-of select="notification_data/request/needed_by" />
 								</td>
 							</tr>
-                            <xsl:call-template name="rs_copyright">
-								<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-							</xsl:call-template>
+							<tr>
+								<td>
+									<b> @@supplied_date@@: </b>
+									<xsl:value-of select="notification_data/request/item_sent_date" />
+								</td>
+							</tr>
+
 						</table>
-
-						<br/><br/>
-
+						<br />
 						<table>
+
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
-							<!-- rs_details from footer.xsl-->
-							<xsl:call-template name="rs_details"/>
+							<!-- rs_dept_details details here from footer.xsl-->
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
+							<tr>
+								<td>
+									<xsl:value-of select="notification_data/library/name" />
+								</td>
+							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if> 
-
+							</xsl:if>
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -149,12 +155,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter" />
-				<xsl:call-template name="donotreply">
-					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-					<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
-				</xsl:call-template>
-
 				<!-- footer.xsl -->
+				<xsl:call-template name="donotreply"/>
 			</body>
 		</html>
 	</xsl:template>

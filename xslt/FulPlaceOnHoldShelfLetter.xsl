@@ -29,7 +29,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				-->
 				<xsl:choose>
 					<xsl:when test="/notification_data/request/resource_sharing_request_id != ''"> <!-- RS letter-->
-					<!-- if RS loan, do not unclude contact details here (they appear below only) -->
+					<!-- if RS loan, do not include contact details here (they appear below only) -->
 						<xsl:call-template name="headFulPlaceOnHoldShelfLetterRS" /> <!-- header.xsl -->
 						<br />
 					</xsl:when>
@@ -80,11 +80,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<xsl:choose>
                             <!-- RS letter-->
 							<xsl:when test="/notification_data/request/resource_sharing_request_id != ''"> 
-								<xsl:call-template name="rs_dept_details"> <!-- footer.xsl -->
-									 <xsl:with-param name="lib_id" select="/notification_data/organization_unit/org_scope/library_id" />
-									 <xsl:with-param name="letter_language" select="/notification_data/receivers/receiver/user/user_preferred_language" />
-									 <xsl:with-param name="lib_name" select="/notification_data/organization_unit/name" /> 
-								</xsl:call-template>				
+								<xsl:call-template name="rs_details" /> <!-- footer.xsl -->
 							</xsl:when>
                             <!-- a letter from Wiener Library -->
                             <xsl:when test="/notification_data/organization_unit/org_scope/library_id = '190905450004146'">

@@ -59,7 +59,7 @@
 												</xsl:attribute>
 												
 												<tr align="center" bgcolor="#f5f5f5">
-													<td colspan="3">
+													<td colspan="4">
 														<h3><xsl:value-of select="library_name" /></h3>
 														<h5>
 															<xsl:call-template name="get_lib_contact_details">
@@ -70,6 +70,7 @@
 												</tr>
 												<tr>
 													<th>@@title@@</th>
+                                                                                                        <th>@@renew_status@@</th>
 													<th><xsl:call-template name="barcode" /></th> <!-- custom template in footer.xsl -->
 													<th>@@due_date@@</th>
 												</tr>
@@ -84,6 +85,7 @@
 															</xsl:if>
 
 														</td> 
+                                                                                                                <td><xsl:value-of select="renew_status" /></td>
 														<td>
 															<xsl:value-of select="barcode" />
 														</td>

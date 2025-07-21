@@ -75,13 +75,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 							<tr>
 								<td>
 									<br/>
-									<b> @@note@@: </b>
+									<b> @@reason@@: </b>
+									<xsl:value-of select="notification_data/reason_unfilled"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<!-- <b> @@note@@: </b> -->
 									<xsl:value-of select="notification_data/note_to_partner"/>
 								</td>
 							</tr>
-                            <xsl:call-template name="rs_copyright">
-								<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-							</xsl:call-template>
 						</table>
 
 						<br/><br/>
@@ -91,16 +94,20 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 								<td>@@signature@@</td>
 							</tr>
 							<!-- rs_details from footer.xsl-->
-							<xsl:call-template name="rs_details"/>
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
+							<tr>
+								<td>
+									<xsl:value-of select="notification_data/library/name" />
+								</td>
+							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if> 
-
+							</xsl:if>
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -149,12 +156,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter" />
-				<xsl:call-template name="donotreply">
-					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-					<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
-				</xsl:call-template>
-
 				<!-- footer.xsl -->
+				<xsl:call-template name="donotreply"/>				
 			</body>
 		</html>
 	</xsl:template>

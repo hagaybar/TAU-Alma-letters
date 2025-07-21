@@ -133,42 +133,6 @@
 							<!-- English letter -->
 						</xsl:if>
 					</xsl:when>
-					<xsl:when test="$label = 'text_03'">
-						<xsl:if test="$letter_language = 'he'">
-							<!-- Hebrew letter -->
-							<u>
-								<b>
-									<xsl:text>במידה וקיים קנס על איחור בהחזרה, ניתן לראותו </xsl:text>
-								</b>
-							</u>
-						</xsl:if>
-						<xsl:if test="not($letter_language = 'he')">
-							<u>
-								<b>
-									<xsl:text>Accrued fines - if exist - are displyed in your </xsl:text>
-								</b>
-							</u>
-							<!-- English letter -->
-						</xsl:if>
-					</xsl:when>
-					<xsl:when test="$label = 'text_04'">
-						<xsl:if test="$letter_language = 'he'">
-							<!-- Hebrew letter -->
-							<u>
-								<b>
-									<xsl:text>בכרטיס הקורא</xsl:text>
-								</b>
-							</u>
-						</xsl:if>
-						<xsl:if test="not($letter_language = 'he')">
-							<u>
-								<b>
-									<xsl:text>library card.</xsl:text>
-								</b>
-							</u>
-							<!-- English letter -->
-						</xsl:if>
-					</xsl:when>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise/>

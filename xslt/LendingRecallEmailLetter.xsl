@@ -36,71 +36,70 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 							<tr>
 								<td>
-									<b>@@request@@</b>
+									<b>@@recall_message@@</b>
 								</td>
 							</tr>
 
 						</table>
 
-                        <br/>
-						<table cellspacing="0" cellpadding="5" border="0">
+						<table cellpadding="5" class="listing">
 							<xsl:attribute name="style">
-								<xsl:call-template name="listStyleCss"/>
-								<!-- style.xsl -->
+								<xsl:call-template name="mainTableStyleCss" /> <!-- style.xsl -->
 							</xsl:attribute>
 							<tr>
-								<td>
-									<b> @@requestId@@: </b>
-									<xsl:value-of select="notification_data/request/external_request_id"/>
-								</td>
+								<th>@@title@@</th>
+								<th>@@author@@</th>
+								<th>@@old_due_date@@</th>
+								<th>@@due_date@@</th>
 							</tr>
-							<tr>
-								<td>
-									<b> @@title@@: </b>
-									<xsl:value-of select="notification_data/request/display/title"/>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<b> @@author@@: </b>
-									<xsl:value-of select="notification_data/request/display/author"/>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<b> @@requestDate@@: </b>
-									<xsl:value-of select="notification_data/request/create_date_str"/>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<br/>
-									<b> @@note@@: </b>
-									<xsl:value-of select="notification_data/note_to_partner"/>
-								</td>
-							</tr>
-                            <xsl:call-template name="rs_copyright">
-								<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-							</xsl:call-template>
-						</table>
 
-						<br/><br/>
+
+							<tr>
+								<td><xsl:value-of select="notification_data/request/display/title"/></td>
+								<td><xsl:value-of select="notification_data/request/display/author"/></td>
+								<td><xsl:value-of select="notification_data/original_due_date"/></td>
+								<td><xsl:value-of select="notification_data/request/due_date"/></td>
+							</tr>
+
+
+                		</table>
+                        <br/>
+                		<table>
+
+						    <tr><b>
+								<td>@@request_id@@</td>
+                                <td>
+									<xsl:value-of select="notification_data/request/external_request_id" />
+								</td>
+                                </b>
+							</tr>
+
+
+
+						</table>
+                        <br/>
+
 
 						<table>
+
 							<tr>
 								<td>@@signature@@</td>
 							</tr>
 							<!-- rs_details from footer.xsl-->
-							<xsl:call-template name="rs_details"/>
+							<xsl:call-template name="rs_details" />
 							<!-- all address lines are commented out
+							<tr>
+								<td>
+									<xsl:value-of select="notification_data/library/name" />
+								</td>
+							</tr>
 							<xsl:if test="notification_data/library/address/line1 !=''">
 								<tr>
 									<td>
 										<xsl:value-of select="notification_data/library/address/line1" />
 									</td>
 								</tr>
-							</xsl:if> 
-
+							</xsl:if>
 							<xsl:if test="notification_data/library/address/line2 !=''">
 								<tr>
 									<td>
@@ -149,12 +148,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					</div>
 				</div>
 				<xsl:call-template name="lastFooter" />
-				<xsl:call-template name="donotreply">
-					<xsl:with-param name="lib_id" select="/notification_data/library/org_scope/library_id" />
-					<xsl:with-param name="letter_language" select="/notification_data/languages/string" />
-				</xsl:call-template>
-
 				<!-- footer.xsl -->
+				<xsl:call-template name="donotreply"/>
 			</body>
 		</html>
 	</xsl:template>
