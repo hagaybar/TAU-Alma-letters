@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<!-- Static content store for additional_text labels -->
+	<xsl:variable name="additional_texts">
+	<texts>
+		<!-- text_01 (Wiener Library only) -->
+		<text label="text_01" lang="he" lib="190905450004146">בדלפק ההשאלה בספריה המרכזית</text>
+		<text label="text_01" lang="en" lib="190905450004146">from the circulation desk at the Central Library</text>
+
+		<!-- text_02 (generic encouragement) -->
+		<text label="text_02" lang="he">קראו ספרים, עשו חיים</text>
+		<text label="text_02" lang="en">Read Books. Live Better</text>
+
+		<!-- text_03 (fines notice) -->
+		<text label="text_03" lang="he">במידה וקיים קנס על איחור בהחזרה, ניתן לראותו </text>
+		<text label="text_03" lang="en">Accrued fines - if exist - are displyed in your </text>
+
+		<!-- text_04 (library card) -->
+		<text label="text_04" lang="he">בכרטיס הקורא</text>
+		<text label="text_04" lang="en">library card.</text>
+	</texts>
+	</xsl:variable>
+
+
+
+
 	<xsl:template name="salutation"/>
 	<xsl:template name="lastFooter">
 		<table>
