@@ -19,6 +19,10 @@
 		<!-- text_04 (library card) -->
 		<text label="text_04" lang="he">בכרטיס הקורא</text>
 		<text label="text_04" lang="en">library card.</text>
+
+		<!-- text_05 (barcode) -->
+		<text label="text_04" lang="he">ברקוד</text>
+		<text label="text_04" lang="en">barcode</text>
 	</texts>
 	</xsl:variable>
 
