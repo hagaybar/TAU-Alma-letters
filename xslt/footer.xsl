@@ -30,14 +30,16 @@
 	<!-- Template to render additional_text content from static XML block -->
 	<xsl:template name="additional_text_lookup">
 	<xsl:param name="label"/>
-	<xsl:param name="letter_language"/>
-	<xsl:param name="lib_id"/>
+	<xsl:param name="letter_language" select="'en'"/>
+	<xsl:param name="lib_id" select="''"/>
 
-	<!-- Try to find a match with label, lang, and exact lib -->
-	<xsl:variable name="matchLib" select="$additional_texts/text[@label = $label and @lang = $letter_language and @lib = $lib_id]"/>
+	<!-- Try to find a text with matching label/lang/lib -->
+	<xsl:variable name="matchLib"
+		select="$additional_texts/text[@label = $label and @lang = $letter_language and @lib = $lib_id]"/>
 
-	<!-- If no exact lib match, fallback to lang+label -->
-	<xsl:variable name="matchGeneric" select="$additional_texts/text[@label = $label and @lang = $letter_language and not(@lib)]"/>
+	<!-- Fallback: matching label/lang with no lib attribute -->
+	<xsl:variable name="matchGeneric"
+		select="$additional_texts/text[@label = $label and @lang = $letter_language and not(@lib)]"/>
 
 	<xsl:choose>
 		<xsl:when test="$matchLib">
@@ -47,7 +49,7 @@
 		<u><b><xsl:value-of select="$matchGeneric"/></b></u>
 		</xsl:when>
 		<xsl:otherwise>
-		<!-- Optional debug message -->
+		<!-- No match: log warning, display nothing -->
 		<xsl:message terminate="no">[No additional_text match for label='<xsl:value-of select="$label"/>']</xsl:message>
 		</xsl:otherwise>
 	</xsl:choose>
