@@ -35,9 +35,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						<table cellspacing="0" cellpadding="5" border="0">
 
 							<tr>
+								<xsl:if test="notification_data/recall_cancelled='true'">
 								<td>
-									<b>@@recall_message@@</b>
+									<strong>@@recall_cancel_message@@</strong>
 								</td>
+								
+								</xsl:if>
+								
+								<xsl:if test="notification_data/recall_cancelled !='true'">
+								<td>
+									<strong>@@recall_message@@</strong>
+								</td>
+								</xsl:if>
 							</tr>
 
 						</table>
