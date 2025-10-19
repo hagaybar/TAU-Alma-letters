@@ -21,8 +21,8 @@
 		<text label="text_04" lang="en">library card.</text>
 
 		<!-- text_05 (barcode) -->
-		<text label="text_04" lang="he">ברקוד</text>
-		<text label="text_04" lang="en">barcode</text>
+		<text label="text_05" lang="he">ברקוד</text>
+		<text label="text_05" lang="en">barcode</text>
 	</texts>
 	</xsl:variable>
 
