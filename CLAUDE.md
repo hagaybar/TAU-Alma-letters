@@ -4,6 +4,8 @@
 
 This repository contains customized XSLT (Extensible Stylesheet Language Transformations) stylesheets for Tel Aviv University's Alma library management system, transforming XML notification data into bilingual (Hebrew/English) HTML emails and printed slips for library patrons covering loans, holds, resource sharing, digitization requests, and general communications.
 
+**IMPORTANT**: For comprehensive information about Alma's letter system, XML structure, configuration methods, and official Ex Libris guidelines, see [ALMA_LETTERS_GUIDE.md](ALMA_LETTERS_GUIDE.md). This document focuses on TAU-specific customizations and development patterns.
+
 ## Core Technology Stack
 
 - **Primary Language**: XSLT 1.0
@@ -160,23 +162,28 @@ TAU library codes and IDs:
 
 ### Paved Path for Adding New Letters
 
-1. **Create new .xsl file** in `xslt/` directory (naming: `FulCamelCaseLetterName.xsl`)
-2. **Include core templates**: header, footer, style, senderReceiver, mailReason, recordTitle
-3. **Use standard template structure** (see "Letter-Specific Patterns" above)
-4. **Call `senderReceiverRevised`** for user/library details (TAU standard)
-5. **Access Alma labels** via `@@label_name@@` (auto-replaced by Alma system)
-6. **Extract data from XML** using XPath: `/notification_data/...`
-7. **Handle bilingual content** with conditional logic on `user_preferred_language`
-8. **Add custom text** via `additional_text_lookup` with new labels in static content store
-9. **Test with sample XML** from `xml/` directory
+1. **Review Alma documentation**: Consult [ALMA_LETTERS_GUIDE.md](ALMA_LETTERS_GUIDE.md) for available XML paths and Alma platform constraints
+2. **Obtain XML sample**: Use Alma's built-in XML sample generator (see ALMA_LETTERS_GUIDE.md → "Obtaining XML Samples")
+3. **Create new .xsl file** in `xslt/` directory (naming: `FulCamelCaseLetterName.xsl`)
+4. **Include core templates**: header, footer, style, senderReceiver, mailReason, recordTitle
+5. **Use standard template structure** (see "Letter-Specific Patterns" above)
+6. **Call `senderReceiverRevised`** for user/library details (TAU standard)
+7. **Access Alma labels** via `@@label_name@@` (auto-replaced by Alma system)
+8. **Extract data from XML** using XPath: `/notification_data/...` (see ALMA_LETTERS_GUIDE.md for complete path reference)
+9. **Handle bilingual content** with conditional logic on `user_preferred_language`
+10. **Add custom text** via `additional_text_lookup` with new labels in static content store
+11. **Test with sample XML** from `xml/` directory or Alma preview pane
+12. **Validate in Alma**: Use Alma's built-in preview before deployment (see ALMA_LETTERS_GUIDE.md → "Testing and Deployment")
 
 ### Paved Path for Modifying Shared Templates
 
 1. **Identify target template** (header.xsl, footer.xsl, etc.)
 2. **Review all includes**: Use `grep -r "xsl:include href=\"{template}.xsl\"" xslt/` to find dependent letters
-3. **Test changes** against multiple letter types (regular loans, RS, different libraries)
-4. **Preserve backward compatibility**: Do not remove existing template parameters or rename templates
-5. **Document library-specific logic**: Add inline XML comments for conditional behavior
+3. **Review Ex Libris constraints**: Check [ALMA_LETTERS_GUIDE.md](ALMA_LETTERS_GUIDE.md) → "XSLT Best Practices" for platform-specific rules
+4. **Test changes** against multiple letter types (regular loans, RS, different libraries)
+5. **Preserve backward compatibility**: Do not remove existing template parameters or rename templates
+6. **Avoid unused template calls**: Remove any `xsl:call-template` references to non-existent templates (causes XSLT failures even in unused code - see ALMA_LETTERS_GUIDE.md)
+7. **Document library-specific logic**: Add inline XML comments for conditional behavior
 
 ## Code Conventions & Guardrails
 
@@ -261,6 +268,17 @@ Key recent commits (from git log):
 
 1. **Branch Strategy**: Work on feature branches, merge to `main` via pull requests
 2. **Testing**: Create sample XML in `xml/`, test locally before Alma deployment
-3. **Deployment**: Upload modified .xsl files to Alma configuration (Letters/Slips section)
-4. **Version Control**: Commit frequently with descriptive messages referencing letter names/template changes
-5. **Documentation**: Update inline comments when adding library-specific logic or new templates
+3. **Alma Preview**: Use Alma's built-in preview pane for real-time validation (see [ALMA_LETTERS_GUIDE.md](ALMA_LETTERS_GUIDE.md) → "Testing and Deployment")
+4. **Deployment**: Upload modified .xsl files to Alma configuration (Letters/Slips section)
+5. **Version Control**: Commit frequently with descriptive messages referencing letter names/template changes
+6. **Documentation**: Update inline comments when adding library-specific logic or new templates
+
+## Additional Resources
+
+- **[ALMA_LETTERS_GUIDE.md](ALMA_LETTERS_GUIDE.md)**: Comprehensive Ex Libris Alma platform documentation including:
+  - Complete XML structure reference (`/notification_data/` paths)
+  - Alma configuration methods (labels vs. templates)
+  - Official XSLT best practices and constraints
+  - Testing/deployment procedures
+  - Troubleshooting checklist
+  - Common customization examples
