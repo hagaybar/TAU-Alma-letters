@@ -25,7 +25,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <xsl:choose>
           <!-- Emergency mode: display simple test message -->
           <xsl:when test="$emergency = 'True'">
-            <xsl:call-template name="head" /><!-- header.xsl -->
+            <xsl:call-template name="headFulUserBorrowingActivityLetter"><!-- header.xsl -->
+              <xsl:with-param name="emergency" select="$emergency" />
+            </xsl:call-template>
             <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
 
             <br />
@@ -86,7 +88,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
           <!-- Normal mode: display regular letter content -->
           <xsl:otherwise>
-            <xsl:call-template name="head" /><!-- header.xsl -->
+            <xsl:call-template name="headFulUserBorrowingActivityLetter"><!-- header.xsl -->
+              <xsl:with-param name="emergency" select="$emergency" />
+            </xsl:call-template>
             <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
 
             <br />

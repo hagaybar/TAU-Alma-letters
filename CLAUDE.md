@@ -41,8 +41,13 @@ All letter stylesheets **MUST** include these core templates:
 
 - **header.xsl** (xslt/header.xsl:1): Logo rendering, library name resolution, letter title/date display
   - `head` template: Standard header with logo and library name (conditional logic for RS letters)
-  - `headFulItemChangeDateLetter`: Specialized header for due date change letters
+  - `headFulItemChangeDateLetter`: Specialized header for due date change letters with custom subject lines
   - `headFulPlaceOnHoldShelfLetterRS`: Header variant for resource sharing hold notifications
+  - `headFulUserBorrowingActivityLetter`: **NEW** - Custom header with emergency mode support (lines 197-255)
+    - Accepts `$emergency` parameter ('True'/'False')
+    - Emergency mode: Custom bilingual subject ("הודעה חשובה מהספרייה" / "Important Library Notice")
+    - Normal mode: Uses Alma's default letter_name label
+    - Use this pattern for letters requiring dynamic email subject lines based on business logic
 
 - **footer.xsl** (xslt/footer.xsl:1): Institutional footers, contact details, static content store
   - **Static Content Store** (lines 5-27): XML-based key-value store for multilingual/library-specific text snippets (labels: text_01-text_05)
@@ -159,6 +164,52 @@ TAU library codes and IDs:
 - **Language Detection**: `/notification_data/receivers/receiver/user/user_preferred_language` or `/notification_data/receivers/receiver/preferred_language`
   - Hebrew: `'he'`
   - English: `'en'` (default fallback)
+
+- **Emergency Mode (FulUserBorrowingActivityLetter.xsl)**:
+  - Controlled by `$emergency` variable ('True'/'False') at line 13
+  - Emergency mode: Displays library closure message with auto-extension notice
+  - Normal mode: Standard borrowing activity summary
+  - Custom header template provides different email subjects for each mode
+  - **To activate**: Change `$emergency` variable to 'True' in letter file
+  - **Purpose**: On-demand emergency broadcast to all library users
+
+### Custom Email Subject Pattern
+
+For letters requiring dynamic email subject lines (e.g., emergency notices, recall vs. renewal), use **custom header templates** in header.xsl:
+
+**Implementation Pattern**:
+1. Create specialized header template named `head{LetterName}` (e.g., `headFulUserBorrowingActivityLetter`)
+2. Accept parameters for conditional logic (e.g., `$emergency`, `$message`)
+3. Define `$letterSubject` variable with conditional `xsl:choose` for subject text
+4. Support bilingual subject lines based on `user_preferred_language`
+5. Call custom header from letter file, passing parameters via `xsl:with-param`
+
+**Example** (FulUserBorrowingActivityLetter.xsl with emergency mode):
+```xml
+<!-- In letter file (FulUserBorrowingActivityLetter.xsl) -->
+<xsl:variable name="emergency" select="'False'" />
+<xsl:call-template name="headFulUserBorrowingActivityLetter">
+  <xsl:with-param name="emergency" select="$emergency" />
+</xsl:call-template>
+
+<!-- In header.xsl -->
+<xsl:template name="headFulUserBorrowingActivityLetter">
+  <xsl:param name="emergency" select="'False'" />
+  <xsl:variable name="letterSubject">
+    <xsl:choose>
+      <xsl:when test="$emergency = 'True'">
+        <!-- Emergency subject: "הודעה חשובה מהספרייה" / "Important Library Notice" -->
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- Normal subject: Use Alma's letter_name label -->
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+  <!-- Render header with $letterSubject -->
+</xsl:template>
+```
+
+**Precedents**: See `headFulItemChangeDateLetter` (header.xsl:82-145) for recall/renewal subject switching, and `headFulPlaceOnHoldShelfLetterRS` (header.xsl:147-195) for bilingual ILL subjects.
 
 ### Paved Path for Adding New Letters
 

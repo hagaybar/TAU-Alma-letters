@@ -145,7 +145,7 @@
 	</xsl:template>
 	
 	<xsl:template name="headFulPlaceOnHoldShelfLetterRS">
-	
+
 		<table cellspacing="0" cellpadding="5" border="0">
 			<xsl:attribute name="style">
 				<xsl:call-template name="headerTableStyleCss" />
@@ -166,19 +166,79 @@
 				</td>
 			</tr>
 			<!-- END OF LOGO INSERT -->
-			
+
 			<xsl:variable name="letterSubject">
 				<xsl:choose> <!-- language -->
-					<xsl:when test = "/notification_data/receivers/receiver/user/user_preferred_language = 'he'">	
+					<xsl:when test = "/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
 						<xsl:text>פריט שהוזמן באמצעות השאלה בין-ספרייתית ממתין עבורך</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:text>The item you requested via interlibrary loan is now available for you at the library</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
-			
+
 			</xsl:variable>
-			
+
+			<tr>
+				<xsl:for-each select="notification_data/general_data">
+					<td>
+						<h1>
+							<xsl:value-of select="$letterSubject"/>
+						</h1>
+					</td>
+					<td align="right">
+						<xsl:value-of select="current_date"/>
+					</td>
+				</xsl:for-each>
+			</tr>
+		</table>
+	</xsl:template>
+
+	<xsl:template name="headFulUserBorrowingActivityLetter">
+		<!-- Emergency mode control parameter: 'False' = normal letter, 'True' = emergency message -->
+		<xsl:param name="emergency" select="'False'" />
+
+		<table cellspacing="0" cellpadding="5" border="0">
+			<xsl:attribute name="style">
+				<xsl:call-template name="headerTableStyleCss" />
+				<!-- style.xsl -->
+			</xsl:attribute>
+			<!-- LOGO INSERT -->
+			<tr>
+				<xsl:attribute name="style">
+					<xsl:call-template name="headerLogoStyleCss" />
+					<!-- style.xsl -->
+				</xsl:attribute>
+				<td colspan="2">
+					<div id="mailHeader">
+						<div id="logoContainer" class="alignLeft">
+							<img src="cid:logo.jpg" alt="logo"/>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<!-- END OF LOGO INSERT -->
+
+			<xsl:variable name="letterSubject">
+				<xsl:choose>
+					<!-- Emergency mode: display emergency-specific subject -->
+					<xsl:when test="$emergency = 'True'">
+						<xsl:choose>
+							<xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+								<xsl:text>הודעה חשובה מהספרייה</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>Important Library Notice</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<!-- Normal mode: use Alma's default letter_name label -->
+					<xsl:otherwise>
+						<xsl:value-of select="/notification_data/general_data/letter_name"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
 			<tr>
 				<xsl:for-each select="notification_data/general_data">
 					<td>
