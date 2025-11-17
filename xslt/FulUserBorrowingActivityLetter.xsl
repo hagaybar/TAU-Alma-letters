@@ -9,6 +9,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:include href="style.xsl" />
   <xsl:include href="recordTitle.xsl" />
 
+  <!-- Emergency mode control variable: 'False' = normal letter, 'True' = emergency message -->
+  <xsl:variable name="emergency" select="'False'" />
+
   <xsl:template match="/">
     <html>
       <head>
@@ -19,15 +22,83 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           <xsl:call-template name="bodyStyleCss" /><!-- style.xsl -->
         </xsl:attribute>
 
-        <xsl:call-template name="head" /><!-- header.xsl -->
-        <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
-		
-		<br />
-		<xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
+        <xsl:choose>
+          <!-- Emergency mode: display simple test message -->
+          <xsl:when test="$emergency = 'True'">
+            <xsl:call-template name="headFulUserBorrowingActivityLetter"><!-- header.xsl -->
+              <xsl:with-param name="emergency" select="$emergency" />
+            </xsl:call-template>
+            <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
+
+            <br />
+            <xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
+
+            <div class="messageArea">
+              <div class="messageBody">
+                <table cellspacing="0" cellpadding="5" border="0">
+                  <tr>
+                    <td>
+                      <xsl:choose>
+                        <xsl:when test="/notification_data/receivers/receiver/user/user_preferred_language = 'he'">
+                          <!-- Hebrew emergency message -->
+                          <p>שלום,</p>
+                          <br/>
+                          <p>ימים לא פשוטים עוברים על כולנו.</p>
+                          <p>עקב המצב, הספרייה סגורה למבקרים עד להודעה חדשה.</p>
+                          <br/>
+                          <p><b>לתשומת לבך:</b></p>
+                          <ul>
+                            <li>מועד ההחזרה של כלל הפריטים שבידיך יוארך באופן אוטומטי עד לחידוש פעילות הספרייה.</li>
+                            <li>אם ברשותך ספר שהוזמן על ידי קוראים אחרים – נבקש להחזירו בהקדם האפשרי עם החזרה לשגרה.</li>
+                            <li>עדכונים על חידוש הפעילות יתפרסמו באתרי הספריות וברשתות החברתיות.</li>
+                          </ul>
+                          <br/>
+                          <p>לשאלות או בקשות, ניתן לפנות לספריות באמצעות דוא"ל או טלפון.</p>
+                          <p>בתקווה לימים שקטים וטובים במהרה,</p>
+                          <p><b>צוות מדורי השאלה בספריות אוניברסיטת תל אביב</b></p>
+                        </xsl:when>
+                        <xsl:otherwise>
+                          <!-- English emergency message -->
+                          <p>Hello,</p>
+                          <br/>
+                          <p>These are challenging times for all of us.</p>
+                          <p>Due to the situation, the library is closed until further notice.</p>
+                          <br/>
+                          <ul>
+                            <li>The return date for all borrowed items will be automatically extended until the library reopens.</li>
+                            <li>We would appreciate it if you could return requested items as soon as possible once regular services resume.</li>
+                            <li>Updates regarding the reopening of the library will be published on the libraries' websites and social media.</li>
+                            <li>For any further questions or requests you are welcome to contact us by e-mail or phone.</li>
+                          </ul>
+                          <br/>
+                          <p>Wishing for calmer and better days soon,</p>
+                          <p><b>The Circulation Department</b></p>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <!-- footer.xsl -->
+            <xsl:call-template name="lastFooter" />
+            <xsl:call-template name="donotreply" />
+          </xsl:when>
+
+          <!-- Normal mode: display regular letter content -->
+          <xsl:otherwise>
+            <xsl:call-template name="headFulUserBorrowingActivityLetter"><!-- header.xsl -->
+              <xsl:with-param name="emergency" select="$emergency" />
+            </xsl:call-template>
+            <xsl:call-template name="senderReceiverRevised" />  <!-- SenderReceiver.xsl -->
+
+            <br />
+            <xsl:call-template name="toWhomIsConcerned" /> <!-- mailReason.xsl -->
 
 
-        <div class="messageArea">
-          <div class="messageBody">
+            <div class="messageArea">
+              <div class="messageBody">
 
 			<table cellspacing="0" cellpadding="5" border="0">
 
@@ -196,13 +267,15 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </div>
         </div>
 
-        <!-- footer.xsl -->
-        <xsl:call-template name="lastFooter" />
-		<xsl:call-template name="donotreply" />
-         <!-- 
-        <xsl:call-template name="myAccount" />
-		<xsl:call-template name="contactUs" />
-         -->
+            <!-- footer.xsl -->
+            <xsl:call-template name="lastFooter" />
+            <xsl:call-template name="donotreply" />
+            <!--
+            <xsl:call-template name="myAccount" />
+            <xsl:call-template name="contactUs" />
+            -->
+          </xsl:otherwise>
+        </xsl:choose>
       </body>
     </html>
   </xsl:template>
