@@ -62,8 +62,8 @@
 
 			</head>
 
-			<body dir="ltr" style="direction: ltr; text-align: left;">
-				<table role="presentation" dir="ltr" border="0" width="100%" cellpadding="0" cellspacing="0" style="background-color: #F1F7F8; direction: ltr; text-align: left;">
+			<body>
+				<table role="presentation" border="0" width="100%" cellpadding="0" cellspacing="0" style="background-color: #F1F7F8;">
 
 					<tr>
 						<td height="50" style="font-size: 50px; line-height: 50px;">&#160; </td>
@@ -140,6 +140,7 @@
 													<strong>
 														<xsl:value-of select="/notification_data/receivers/receiver/user/first_name" />
 														&#160;
+
 														<xsl:value-of select="/notification_data/receivers/receiver/user/last_name" />
 														,
 													</strong>
@@ -195,7 +196,4 @@
 			</body>
 		</html>
 	</xsl:template>
-
-
-
 </xsl:stylesheet>
